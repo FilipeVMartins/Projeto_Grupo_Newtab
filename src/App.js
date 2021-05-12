@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+import React from 'react';
+import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
+
+
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
+
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends React.Component {
 
-export default App;
+
+
+
+
+
+
+
+
+
+
+  render() {
+    return (
+      <div className="App">
+      <BrowserRouter>
+
+        <header className="App-header">
+          <nav className="App-nav">
+            <NavLink exact to="/" className="App-link" activeClassName="App-link-CurrentPage" >
+              Home
+            </NavLink>
+            <NavLink exact to="/About" className="App-link" activeClassName="App-link-CurrentPage" >
+              About
+            </NavLink>
+          </nav>
+        </header>
+
+
+        <div className="App-content">
+          <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
+          </Switch>
+        </div>
+      
+        <footer className="App-footer">
+            <div>
+            </div>
+        </footer>
+
+      </BrowserRouter>
+    </div>
+      );
+    }
+}

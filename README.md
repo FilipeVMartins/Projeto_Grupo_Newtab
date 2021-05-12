@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # Projeto_Grupo_Newtab
 Primeiro Projeto em Grupo na Newtab Academy
-=======
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -72,4 +71,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> d68be2d90bad54690fc4b07816ad27be2a41bafb
