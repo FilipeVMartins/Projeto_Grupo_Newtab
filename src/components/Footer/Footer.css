@@ -1,0 +1,12 @@
+.footerBackground{
+    background-color: #D842BD;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    justify-content: center;
+}
+.footerText{
+    color: #FFFFFF;
+    font-size:20px;
+    font-family: 'Rubik', sans-serif;
+}
