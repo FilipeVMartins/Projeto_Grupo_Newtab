@@ -5,7 +5,6 @@
 }
 
 /*header*/
-
 .about-content{
     width: 100vw;
     height: 100vh;
@@ -25,6 +24,7 @@
     padding-left: 140px;
 }
 
+/*descrição do projeto projeto*/
 .about-aside{
     width: 48%;
     padding-right: 10%;
@@ -54,6 +54,7 @@
     width: 42%;
 }
 
+/*quem somos nós*/
 .about-we{
     padding-top: 193px;
     color: #3634F7;
@@ -70,6 +71,7 @@
     margin: 0 auto;
 }
 
+/*cards da equipe*/
 .about-card{
     width: 398px;
     box-shadow: 0px 5px 10px #5538EE14;
@@ -132,7 +134,7 @@
 
 /* responsivo mobile */
 @media(max-width: 600px){
-
+    /* reponsividade header*/
     .about-header {
         height: 206px;
     }
@@ -144,7 +146,7 @@
         padding-left: 0;
         text-align: center;
     }
-
+    /* reponsividade descrição do projeto*/
     .about-projeto {
         padding-top: 55px;
         width: 80%;
@@ -169,7 +171,7 @@
     .about-svg {
         width: 100%;
     }
-
+    /*reponsividade seção quem somos nós*/
     .about-we {
         padding-top: 112px;
         padding-bottom: 46px;
@@ -181,7 +183,7 @@
         width: 86%;
         flex-direction: column;
     }
-
+    /*reponsividade cards equipe*/
     .about-card {
         width: 100%;
         margin-right: 0px;

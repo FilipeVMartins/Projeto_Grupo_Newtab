@@ -42,9 +42,9 @@ export default class About extends React.Component {
                   sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...
                 </p>
                 <div className="about-socials">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                  <a href="#"><i class="fas fa-envelope"></i></a>
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
+                  <a href="#"><i className="fab fa-github"></i></a>
+                  <a href="#"><i className="fas fa-envelope"></i></a>
+                  <a href="#"><i className="fab fa-linkedin"></i></a>
                 </div>
               </div>
             </div>
