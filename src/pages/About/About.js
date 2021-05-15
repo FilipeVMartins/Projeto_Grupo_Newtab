@@ -2,6 +2,8 @@ import React from 'react';
 
 import './About.css';
 
+import Footer from "../../components/Footer/Footer.jsx"
+
 import svg from '../../images/layout1/about-illustration.svg';
 
 export default class About extends React.Component {
@@ -94,6 +96,9 @@ export default class About extends React.Component {
               </div>
             </div>
           </div>
+          <footer>
+           <Footer/>
+          </footer>
       </div>
 
 
