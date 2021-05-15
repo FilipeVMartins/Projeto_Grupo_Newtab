@@ -1,6 +1,14 @@
 
+body {
+    letter-spacing: 0px;
+}
 
-
+.home-content * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    
+}
 
 .home-header {
     background-image: url("../../images/layout1/hero-bg-mobile.jpg");
@@ -10,6 +18,8 @@
 
     height: 58.03vh;
 }
+
+
 
 .home-nav {
     /*background-color: violet;*/
@@ -36,9 +46,9 @@
 .home-input-wrapper {
     background-color: #FFFFFF;
     width: 100%;
+    max-width: 1000px;
     height: 51px;
     border-radius: 72px;
-    padding: 14px;
     padding: 17px;
     margin-top: 72px;
     box-sizing: border-box;
@@ -47,6 +57,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
 
     box-shadow: 8px 14px 30px #5538EE29;
 }
@@ -66,7 +79,7 @@
     height: 20px;
     border: none;
     padding: 0px;
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .home-input-wrapper input::placeholder {
@@ -81,15 +94,45 @@
 
 
 .home-results {
-    padding: 32px;
+    padding: 32px 20px;
 }
 
 .home-results .results-title h2  {
     margin: 0px;
     color: #3634F7;
     font-weight: bolder;
-    font-size: 22px;
+    font-size: 24px;
     text-align: center;
     margin-top: 22px;
     letter-spacing: 0px;
+}
+
+
+
+
+.home-results .posts-section {
+    /* background-color: aliceblue; */
+    background-color: #FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 686px){
+    .home-header {
+        background-image: url("../../images/layout1/hero-bg.jpg");
+        background-position: right;
+        height: 72.96vh;
+    }
+
+    .home-input-wrapper {
+        width: 52.08%;
+        min-width: 621px; /* depends on @mediascreen*/
+    }
 }
