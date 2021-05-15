@@ -1,3 +1,4 @@
+/* Configs em comum */
 .footerBackground{
     background-color: #D842BD;
     display: flex;
@@ -7,6 +8,14 @@
 }
 .footerText{
     color: #FFFFFF;
-    font-size:20px;
+    
     font-family: 'Rubik', sans-serif;
+}
+/* Desktop */
+.footerTextDesktop{
+    font-size:25px;
+}
+/* Mobile */
+.footerTextMobile{
+    font-size:10px;
 }
