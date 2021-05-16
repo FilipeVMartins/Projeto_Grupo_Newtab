@@ -1,0 +1,21 @@
+/* Configs em comum */
+.footerBackground{
+    background-color: #D842BD;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    justify-content: center;
+}
+.footerText{
+    color: #FFFFFF;
+    
+    font-family: 'Rubik', sans-serif;
+}
+/* Desktop */
+.footerTextDesktop{
+    font-size:25px;
+}
+/* Mobile */
+.footerTextMobile{
+    font-size:10px;
+}

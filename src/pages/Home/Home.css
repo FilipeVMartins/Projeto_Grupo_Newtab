@@ -1,0 +1,138 @@
+
+body {
+    letter-spacing: 0px;
+}
+
+.home-content * {
+    padding: 0;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    
+}
+
+.home-header {
+    background-image: url("../../images/layout1/hero-bg-mobile.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 58.03vh;
+}
+
+
+
+.home-nav {
+    /*background-color: violet;*/
+    height: 10%;
+    opacity: 0.3;
+}
+
+.home-title-input-wrapper {
+    padding: 32px;
+    color: #FFFFFF;
+    margin-top: 25px;
+}
+
+.home-header-title {
+    max-width: 350px;
+}
+
+/* remove it on desk top*/
+.home-header-title h1::after{
+    content: ".";
+}
+
+
+.home-input-wrapper {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 1000px;
+    height: 51px;
+    border-radius: 72px;
+    padding: 17px;
+    margin-top: 72px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    box-shadow: 8px 14px 30px #5538EE29;
+}
+
+.home-input-wrapper .search-icon {
+    height: 12px;
+    width: 12px;
+    margin-right: 15px;
+    margin-left: 5px;
+}
+.home-input-wrapper form {
+    width: calc(100% - 40px);
+}
+.home-input-wrapper input {
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 20px;
+    border: none;
+    padding: 0px;
+    font-size: 19px;
+}
+
+.home-input-wrapper input::placeholder {
+    /* modern browser */
+    color: #8d9da2;
+    opacity: 0.31;
+    font-weight: normal;
+}
+.home-input-wrapper input:focus {
+    outline: none;
+}
+
+
+.home-results {
+    padding: 32px 20px;
+}
+
+.home-results .results-title h2  {
+    margin: 0px;
+    color: #3634F7;
+    font-weight: bolder;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 22px;
+    letter-spacing: 0px;
+}
+
+
+
+
+.home-results .posts-section {
+    /* background-color: aliceblue; */
+    background-color: #FFFFFF;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 686px){
+    .home-header {
+        background-image: url("../../images/layout1/hero-bg.jpg");
+        background-position: right;
+        height: 72.96vh;
+    }
+
+    .home-input-wrapper {
+        width: 52.08%;
+        min-width: 621px; /* depends on @mediascreen*/
+    }
+}

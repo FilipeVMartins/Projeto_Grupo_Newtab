@@ -1,31 +1,21 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
 
-
+//pages
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 
-
+//style
 import './App.css';
 
 export default class App extends React.Component {
-
-
-
-
-
-
-
-
-
-
 
   render() {
     return (
       <div className="App">
       <BrowserRouter>
 
-        <header className="App-header">
+        {/* <header className="App-header">
           <nav className="App-nav">
             <NavLink exact to="/" className="App-link" activeClassName="App-link-CurrentPage" >
               Home
@@ -34,20 +24,17 @@ export default class App extends React.Component {
               About
             </NavLink>
           </nav>
-        </header>
+        </header> 
+        
+        this belongs to header component (David), it's going to recieve one prop of display (none or block) for each button (total four), it's going to be imported within each page and so will the footer component.
+        */}
 
 
-        <div className="App-content">
-          <Switch>
-            <Route path="/" exact={true} component={Home} />
-            <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
-          </Switch>
-        </div>
-      
-        <footer className="App-footer">
-            <div>
-            </div>
-        </footer>
+        <Switch>
+          {/* add your Route here */}
+          <Route path="/" exact={true} component={Home} />
+          <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
+        </Switch>
 
       </BrowserRouter>
     </div>
