@@ -108,6 +108,26 @@ body {
 }
 
 
+.home-results .carousel-section {
+    width: 100vw;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+
+    position: relative;
+    left: -20px; /* left padding of the results content*/
+
+    margin-top: 25px;
+    margin-bottom: 50px;
+
+    overflow: auto;
+
+
+    
+}
 
 
 .home-results .posts-section {
