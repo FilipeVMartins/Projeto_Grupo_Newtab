@@ -1,0 +1,40 @@
+.searchBackground{
+    width: 100%;
+    display: flex;
+    place-content: center;
+    align-items: flex-end;
+}
+.search, .search:focus{
+    outline: none;
+    background-image: url(./icon/icon-search.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+/* Desktop */
+.searchDesktop, .searchDesktop:focus{
+    width: 1000px;
+    height: 120px;
+    border-radius: 60px;
+    font-size: 50px;
+    padding: 60px 100px;
+    background-position-x: 40px;
+}
+.searchBackgroundDesktop{
+    height: 300px;
+}
+
+/* Mobile */
+.searchMobile, .searchMobile:focus{
+    width: 350px;
+    height: 50px;
+    border-radius: 40px;
+    font-size: 17px;
+    padding: 30px 50px;
+    background-position-x: 20px;
+    background-size: 20px;
+}
+
+.searchBackgroundMobile{
+    height: 300px;
+}
