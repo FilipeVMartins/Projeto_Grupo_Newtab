@@ -5,7 +5,7 @@ import useWindowDimensions from "../WindowsDimension/useWindowDimensions"
 import "./Menu.css";
 
 
-
+//adiciona botão na pagina de Login.
 function MenuLogin() {
     const { width } = useWindowDimensions();
     const platform = width > 1000 ? "Desktop" : "Mobile";
