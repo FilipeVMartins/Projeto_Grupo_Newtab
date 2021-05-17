@@ -8,6 +8,10 @@ import PostResult from '../../components/PostResult/PostResult';
 import ImageResult from '../../components/ImageResult/ImageResult';
 import Footer from '../../components/Footer/Footer';
 
+import MenuLogoWhite from '../../components/Menu/MenuLogoWhite';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Hero from '../../components/Hero/Hero';
+
 
 
 import './Home.css';
@@ -21,10 +25,13 @@ export default class Home extends React.Component {
 
     return (
       
+
       <div className="home-content">
+
 
         <div className="home-header">
           <div className="home-nav" >
+            <MenuLogoWhite />
           </div>
 
           <div className="home-title-input-wrapper">
@@ -106,7 +113,6 @@ export default class Home extends React.Component {
 
 
         </div>
-        
         
         <Footer></Footer>
       </div>
