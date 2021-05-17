@@ -1,0 +1,36 @@
+/* Configs em comum */
+.buttonMenuPink{
+    border-radius: 25px;
+    border:none;
+    font-weight:bold;
+    color: #FFFFFF;
+    letter-spacing: 3px;
+    background-color: #D842BD;
+}
+.imgButtonMenu{
+    margin-right: 10px;
+}
+
+/* Desktop */
+.buttonMenuDesktop{
+    width: 170px;
+    height: 50px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-right: 20px;
+    font-size:17px;
+}
+.imgButtonMenuDesktop{
+    width: 16px;
+}
+/* Mobile */
+.buttonMenuMobile{
+    width: 100px;
+    height: 30px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    font-size:10px;
+}
+.imgButtonMenuMobile{
+    width: 10px;
+}

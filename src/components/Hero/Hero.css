@@ -1,0 +1,10 @@
+/* Configs em comum */
+
+
+/* Desktop */
+.heroBackgroundDesktop{
+    background-image: url(./img/hero-bg.jpg);
+}
+
+
+/* Mobile */
