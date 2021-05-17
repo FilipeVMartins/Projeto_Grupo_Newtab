@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
 //pages
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
+import SearchListing from './pages/SearchListing/SearchListing';
 
 //style
 import './App.css';
@@ -34,6 +35,7 @@ export default class App extends React.Component {
           {/* add your Route here */}
           <Route path="/" exact={true} component={Home} />
           <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
+          <Route path="/SearchListing" exact={true} component={SearchListing} />
         </Switch>
 
       </BrowserRouter>
