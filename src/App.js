@@ -1,9 +1,13 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
 
+// lançar mensagens de aviso ao user
+import { ToastContainer } from 'react-toastify';
+
 //pages
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
+import Login from './pages/Login/Login';
 
 //style
 import './App.css';
@@ -34,7 +38,10 @@ export default class App extends React.Component {
           {/* add your Route here */}
           <Route path="/" exact={true} component={Home} />
           <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
+          <Route path="/Login" exact={true} component={Login} />
         </Switch>
+
+        <ToastContainer autoClose={3000} />
 
       </BrowserRouter>
     </div>
