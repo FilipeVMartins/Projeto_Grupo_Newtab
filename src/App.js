@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Login from './pages/Login/Login';
+import SearchListing from './pages/SearchListing/SearchListing';
 
 //style
 import './App.css';
@@ -39,6 +40,7 @@ export default class App extends React.Component {
           <Route path="/" exact={true} component={Home} />
           <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
           <Route path="/Login" exact={true} component={Login} />
+          <Route path="/SearchListing" exact={true} component={SearchListing} />
         </Switch>
 
         <ToastContainer autoClose={3000} />

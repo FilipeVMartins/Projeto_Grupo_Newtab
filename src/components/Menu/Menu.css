@@ -1,0 +1,30 @@
+/* Configs em comum */
+.menuBackground{
+    display:flex;
+    flex-direction: row;
+    place-content: space-between;
+    width: 100%;
+}
+/* Desktop */
+#logoDesktop{
+    width:250px;
+    height:50px;
+}
+.logoDesktop{
+    padding:20px
+}
+
+.menuButtonsDesktop{
+    padding: 20px;
+}
+/* Mobile */
+#logoMobile{
+    width:130px;
+    height:25px;
+}
+.menuButtonsMobile{
+    padding: 10px;
+}
+.logoMobile{
+    padding:10px
+}

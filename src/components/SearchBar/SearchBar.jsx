@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Search.css"
+import "./SearchBar.css"
 import useWindowDimensions from "../WindowsDimension/useWindowDimensions"
 
 

@@ -1,0 +1,91 @@
+/* Configs em comum */
+body{
+    font-family: 'Rubik', sans-serif;
+}
+.searchListingBackground{
+    background-image: url(./img/login-bg.jpg);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.listing{
+    background-color: #FFFFFF;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+.searchListing{
+    margin-top:50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.listingTop{
+    color:#3633F7;
+}
+.searchListingTitle{
+    color:#FFFFFF;
+    font-weight: bold;
+    padding:20px 0;
+}
+.listingObjectDesktop{
+    color: #292929;
+    padding:30px;
+    text-align: left;
+}
+.listingObjectHastag, .listingTitleHastag{
+    width:60%
+}
+.listingObjectDate, .listingObjectHour, .listingTitleDate, .listingTitleHour{
+    width:20%
+}
+.listingTop{
+    background-color: #F1F1F1;
+    border-radius: 20px 20px 0 0;
+    padding:10px;
+}
+.listingLine{
+    border-bottom: 1px solid #41558E;
+    margin: 10px;
+}
+.listingTop, .listingLine{
+    display: flex;
+}
+.listingLast{
+    border: none;
+}
+.listingTitleHastag, .listingTitleDate, .listingTitleHour, .listingObjectHastag, .listingObjectDate, .listingObjectHour{
+    padding: 20px;
+}
+
+/* Desktop */
+.listingDesktop{
+    width: 70%;
+}
+.searchListingDesktop{
+    margin:30px 15%;
+}
+.listingTitleDesktop{
+    font-size:24px;
+}
+.searchListingTitleDesktop{
+    font-size:40px;
+    justify-items:left;
+}
+.listingObjectDesktop{
+    font-size:24px;
+}
+/* Mobile */
+.listingMobile{
+    width: 90%;
+}
+.searchListingMobile{
+    margin:30px 5%;
+}
+.searchListingTitleMobile{
+    font-size:39px;
+    justify-items:center;
+}
+.listingObjectMobile{
+    font-size:14px;
+}
