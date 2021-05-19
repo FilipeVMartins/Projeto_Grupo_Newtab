@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Rubik', sans-serif;
 }
 
@@ -11,9 +11,11 @@ html {
 
 body {
     letter-spacing: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
-@media screen and (min-width: 660px){
+@media screen and (min-width: 800px){
     html {
         font-size: 0.833vw; /*based on the proportion of 16px to the specified layout screen size of  1920, this will change the default value of rem unit of you page*/
     }
