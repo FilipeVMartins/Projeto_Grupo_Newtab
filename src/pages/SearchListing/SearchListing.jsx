@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuSearch from '../../components/Menu/MenuSearch'
-import './SearchiListing.css';
+import './SearchListing.css'; // Estava 'SearchiListing', mudei para 'SearchListing'
 import useWindowDimensions from "../../components/WindowsDimension/useWindowDimensions";
 
 

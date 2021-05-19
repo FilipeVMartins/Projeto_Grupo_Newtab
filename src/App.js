@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 // lançar mensagens de aviso ao user
 import { ToastContainer } from 'react-toastify';

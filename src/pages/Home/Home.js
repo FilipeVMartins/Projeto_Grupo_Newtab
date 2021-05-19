@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { ReactComponent as SearchIcon } from '../../images/layout1/icon-search.svg';
 import { ReactComponent as ArrowLeftIcon } from '../../images/layout1/icon-arrow-left.svg';
 import { ReactComponent as ArrowRightIcon } from '../../images/layout1/icon-arrow-right.svg';
@@ -8,9 +7,7 @@ import PostResult from '../../components/PostResult/PostResult';
 import ImageResult from '../../components/ImageResult/ImageResult';
 import Footer from '../../components/Footer/Footer';
 
-import MenuLogoWhite from '../../components/Menu/MenuLogoWhite';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import Hero from '../../components/Hero/Hero';
+import NavMenu from '../../components/Menu/NavMenu';
 
 
 
@@ -24,14 +21,10 @@ export default class Home extends React.Component {
     
 
     return (
-      
-
       <div className="home-content">
-
-
         <div className="home-header">
           <div className="home-nav" >
-            <MenuLogoWhite />
+            <NavMenu />
           </div>
 
           <div className="home-title-input-wrapper">
