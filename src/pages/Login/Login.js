@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 
+import NavMenu from '../../components/Menu/NavMenu';
+
 import './Login.css';
 
 export default function Login() {
@@ -26,30 +28,34 @@ export default function Login() {
   }
   
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <>
+      <NavMenu />
+      <div className="container">
+        
+        <form onSubmit={handleSubmit}>
+          <h2>Login</h2>
 
-        <label htmlFor="email">
-          <input 
-            type="email" 
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            placeholder="Usuário"
-          />
-        </label>
+          <label htmlFor="email">
+            <input 
+              type="email" 
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="Usuário"
+            />
+          </label>
 
-        <label htmlFor="senha">
-          <input 
-            type="password" 
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            placeholder="Senha"
-          />
-        </label>
+          <label htmlFor="senha">
+            <input 
+              type="password" 
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Senha"
+            />
+          </label>
 
-        <button type="submit">ACESSAR</button>
-      </form>
-    </div>
+          <button type="submit">ACESSAR</button>
+        </form>
+      </div>
+    </>  
   );
 }

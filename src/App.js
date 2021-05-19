@@ -1,9 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-// lançar mensagens de aviso ao user
-import { ToastContainer } from 'react-toastify';
-
 //pages
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
@@ -41,11 +38,12 @@ export default class App extends React.Component {
           <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
           <Route path="/Login" exact={true} component={Login} />
           <Route path="/SearchListing" exact={true} component={SearchListing} />
+          
         </Switch>
 
-        <ToastContainer autoClose={3000} />
+        
 
-      </BrowserRouter>
+      </BrowserRouter>      
     </div>
       );
     }
