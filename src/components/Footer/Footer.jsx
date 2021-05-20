@@ -9,7 +9,7 @@ function Footer(){
     return(
         <div className="footerBackground">
             <span className={"footerText footerText"+platform}>
-            @Cocreare 2020. Todos os direitos reservados
+            @Cocreare 2021. Todos os direitos reservados
             </span>
         </div>
     )
