@@ -17,7 +17,9 @@ export default class About extends React.Component {
     
       <div className="about-content">
           <div className="about-header">
-            <NavMenu/>
+            <header className="header">
+                <NavMenu/>
+            </header>
              <h1 className="about-sobre">Sobre o projeto</h1>
           </div>
           <div className="about-projeto">

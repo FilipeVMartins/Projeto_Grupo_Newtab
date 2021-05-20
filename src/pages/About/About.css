@@ -17,6 +17,10 @@
     background-size: cover;
 }
 
+.header{
+    width: 93%;
+}
+
 .about-sobre {
     color: #ffff;
     font-size: 90px;
