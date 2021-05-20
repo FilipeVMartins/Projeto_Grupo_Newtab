@@ -6,10 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background-image: url("../../images/layout1/login-bg.jpg");
-}
-
 button {
   cursor: pointer;
   background: rgb(99, 12, 212);
@@ -23,6 +19,15 @@ button {
 
 button:hover {
   background: rgb(190, 5, 246);
+}
+
+.fundo-page {
+  background-image: url("../../images/layout1/login-bg.jpg");
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .loginpage-container {
@@ -63,4 +68,3 @@ button:hover {
 .loginpage-container form label {
   margin-bottom: 20px;
 }
-

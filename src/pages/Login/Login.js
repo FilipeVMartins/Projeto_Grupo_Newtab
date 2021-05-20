@@ -29,8 +29,9 @@ export default function Login() {
   }
   
   return (
-    <>
-      <NavMenu />
+    <div className="fundo-page">
+      <NavMenu />      
+      
       <div className="loginpage-container">
         
         <form onSubmit={handleSubmit}>
@@ -56,7 +57,7 @@ export default function Login() {
 
           <button type="submit">ACESSAR</button>
         </form>
-      </div>
-    </>  
+      </div>    
+    </div>  
   );
 }
