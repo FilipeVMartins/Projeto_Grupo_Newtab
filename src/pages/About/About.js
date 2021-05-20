@@ -2,6 +2,8 @@ import React from 'react';
 
 import './About.css';
 
+import NavMenu from '../../components/Menu/NavMenu.jsx'
+
 import Footer from "../../components/Footer/Footer.jsx"
 
 import svg from '../../images/layout1/about-illustration.svg';
@@ -15,7 +17,8 @@ export default class About extends React.Component {
     
       <div className="about-content">
           <div className="about-header">
-            <h1 className="about-sobre">Sobre o projeto</h1>
+            <NavMenu/>
+             <h1 className="about-sobre">Sobre o projeto</h1>
           </div>
           <div className="about-projeto">
             <div className="about-aside">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 
@@ -20,7 +21,7 @@ export default function Login() {
       toast.error('E-mail inválido!');
     }
 
-    if (password.length <= 6 || password.length >= 20) {
+    if (password.length <= 5 || password.length >= 20) {
       formErrors = true;
       toast.error('Senha deve ter entre 6 e 20 caracteres!');
       console.log(formErrors);
@@ -28,9 +29,10 @@ export default function Login() {
   }
   
   return (
-    <>
-      <NavMenu />
-      <div className="container">
+    <div className="fundo-page">
+      <NavMenu />      
+      
+      <div className="loginpage-container">
         
         <form onSubmit={handleSubmit}>
           <h2>Login</h2>
@@ -55,7 +57,7 @@ export default function Login() {
 
           <button type="submit">ACESSAR</button>
         </form>
-      </div>
-    </>  
+      </div>    
+    </div>  
   );
 }

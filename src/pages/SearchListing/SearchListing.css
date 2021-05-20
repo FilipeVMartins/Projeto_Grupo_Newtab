@@ -51,13 +51,13 @@ body{
 .listingTop, .listingLine{
     display: flex;
 }
-.listingLast{
-    border: none;
-}
 .listingTitleHastag, .listingTitleDate, .listingTitleHour, .listingObjectHastag, .listingObjectDate, .listingObjectHour{
     padding: 20px;
 }
 
+td:last-child{
+    border-bottom:none;
+}
 /* Desktop */
 .listingDesktop{
     width: 70%;
@@ -88,4 +88,8 @@ body{
 }
 .listingObjectMobile{
     font-size:14px;
+}
+.searchListingDivMobile {
+    width: 90%;
+    text-align: center;
 }

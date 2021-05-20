@@ -11,33 +11,31 @@ function SearchiListing() {
         <div className="searchListingBackground">
             <MenuSearch />
             <div className={"searchListing searchListing" + platform}>
-                <div>
-                <span className={"searchListingTitle searchListingTitle" + platform}>Buscas realizadas</span>
-                <div className={"listing listing" + platform}>
-                    <div className="listingTop">
-                        <div className={"listingTitleHastag listingTitle" + platform}>Hashtag</div>
-                        <div className={"listingTitleDate listingTitle" + platform}>Data</div>
-                        <div className={"listingTitleHour listingTitle" + platform}>Hora</div>
-                    </div>
-                    <div className="listingLine">
-                        <div className={"listingObjectHastag listingObject" + platform}>#hashtagname</div>
-                        <div className={"listingObjectDate listingObject" + platform}>25/02</div>
-                        <div className={"listingObjectHour listingObject" + platform}>09:30</div>
-                    </div>
-                    <div className="listingLine">
-                        <div className={"listingObjectHastag listingObject" + platform}>#hashtagname</div>
-                        <div className={"listingObjectDate listingObject" + platform}>25/02</div>
-                        <div className={"listingObjectHour listingObject" + platform}>09:30</div>
-                    </div>
-                    <div className="listingLine">
-                        <div className={"listingObjectHastag listingObject" + platform}>#hashtagname</div>
-                        <div className={"listingObjectDate listingObject" + platform}>25/02</div>
-                        <div className={"listingObjectHour listingObject" + platform}>09:30</div>
-                    </div>
-                    <div className="listingLast">
-                    </div>
-                </div> 
+                <div className={"searchListingDiv" + platform}>
+                    <span className={"searchListingTitle searchListingTitle" + platform}>Buscas realizadas</span>
                 </div>
+                <table className={"listing listing" + platform}>
+                    <th className="listingTop">
+                        <tr className={"listingTitleHastag listingTitle" + platform}>Hashtag</tr>
+                        <tr className={"listingTitleDate listingTitle" + platform}>Data</tr>
+                        <tr className={"listingTitleHour listingTitle" + platform}>Hora</tr>
+                    </th>
+                    <td className="listingLine">
+                        <tr className={"listingObjectHastag listingObject" + platform}>#hashtagname</tr>
+                        <tr className={"listingObjectDate listingObject" + platform}>25/02</tr>
+                        <tr className={"listingObjectHour listingObject" + platform}>09:30</tr>
+                    </td>
+                    <td className="listingLine">
+                        <tr className={"listingObjectHastag listingObject" + platform}>#hashtagname</tr>
+                        <tr className={"listingObjectDate listingObject" + platform}>25/02</tr>
+                        <tr className={"listingObjectHour listingObject" + platform}>09:30</tr>
+                    </td>
+                    <td className="listingLine">
+                        <tr className={"listingObjectHastag listingObject" + platform}>#hashtagname</tr>
+                        <tr className={"listingObjectDate listingObject" + platform}>25/02</tr>
+                        <tr className={"listingObjectHour listingObject" + platform}>09:30</tr>
+                    </td>
+                </table>
             </div>
         </div>
     );

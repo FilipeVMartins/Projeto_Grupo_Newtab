@@ -10,15 +10,18 @@ div.nav-menu {
     align-items: center;
     width: 100%;
     padding: 2rem 1rem;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0px;
 }
 
-.nav-menu .logo-img {
+div.nav-menu .logo-img {
     width: 8.125rem;
     height: 1.438rem;
     
 }
 
-.nav-menu nav.app-nav {
+div.nav-menu nav.app-nav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -72,7 +75,7 @@ nav.app-nav .nav-link img {
         padding: 2.25rem 4rem;
     }
     
-    .nav-menu .logo-img {
+    div.nav-menu .logo-img {
         width: 14.938rem;
         height: 2.625rem;
     }
