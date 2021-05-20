@@ -13,14 +13,14 @@
 .about-header{
     background-image: url(../../images/layout1/about-bg.jpg);
     width: 100%;
-    height: 39%;
+    height: 422px;
     background-size: cover;
 }
 
 .about-sobre {
     color: #ffff;
     font-size: 90px;
-    padding-top: 168px;
+    margin-top: 8.25rem;
     padding-left: 140px;
 }
 
@@ -142,14 +142,14 @@
     .about-sobre{
         font-size: 33px;
         width: 100%;
-        padding-top: 46px;
+        margin-top: 0.875rem;
         padding-left: 0;
         text-align: center;
     }
     /* reponsividade descrição do projeto*/
     .about-projeto {
         padding-top: 55px;
-        width: 80%;
+        width: 82%;
         flex-direction: column;
     }
 
@@ -176,6 +176,7 @@
         padding-top: 112px;
         padding-bottom: 46px;
         font-size: 22px;
+        width: 82%;
     }
 
     .about-team {
