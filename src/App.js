@@ -1,9 +1,10 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 //pages
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
+import Login from './pages/Login/Login';
 import SearchListing from './pages/SearchListing/SearchListing';
 
 //style
@@ -35,10 +36,14 @@ export default class App extends React.Component {
           {/* add your Route here */}
           <Route path="/" exact={true} component={Home} />
           <Route path="/About" exact={true} component={() => <About scrollFunction={'this.contentScrollPage'} />} />
+          <Route path="/Login" exact={true} component={Login} />
           <Route path="/SearchListing" exact={true} component={SearchListing} />
+          
         </Switch>
 
-      </BrowserRouter>
+        
+
+      </BrowserRouter>      
     </div>
       );
     }

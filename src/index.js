@@ -1,4 +1,6 @@
 import React from 'react';
+// lançar mensagens de aviso ao user
+import { ToastContainer } from 'react-toastify';
 
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -8,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <ToastContainer autoClose={1000} />
   </React.StrictMode>,
   document.getElementById('root')
 );
