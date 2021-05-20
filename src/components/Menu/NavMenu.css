@@ -12,7 +12,7 @@ div.nav-menu {
     padding: 2rem 1rem;
     position: -webkit-sticky; /* Safari */
     position: sticky;
-    top: 500px;
+    top: 0px;
 }
 
 div.nav-menu .logo-img {
