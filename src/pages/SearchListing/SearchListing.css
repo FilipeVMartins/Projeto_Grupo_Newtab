@@ -43,6 +43,7 @@ body{
     background-color: #F1F1F1;
     border-radius: 20px 20px 0 0;
     padding:10px;
+    text-align: left;
 }
 .listingLine{
     border-bottom: 1px solid #41558E;
@@ -63,7 +64,8 @@ td:last-child{
     width: 70%;
 }
 .searchListingDesktop{
-    margin:30px 15%;
+    display: flex;
+    align-items: center;
 }
 .listingTitleDesktop{
     font-size:24px;
@@ -74,6 +76,9 @@ td:last-child{
 }
 .listingObjectDesktop{
     font-size:24px;
+}
+.searchListingDivDesktop {
+    width: 70%;
 }
 /* Mobile */
 .listingMobile{
