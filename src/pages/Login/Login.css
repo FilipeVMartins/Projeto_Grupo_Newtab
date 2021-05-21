@@ -18,7 +18,8 @@
   transition: all 300ms;
   margin-top: 2.813rem;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.188rem;
+  font-weight: bold;
 }
 
 .fundo-page button:hover {
@@ -28,6 +29,7 @@
 .fundo-page {
   background-image: url("../../images/layout1/login-bg.jpg");
   background-image: no-repeat;
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -72,4 +74,19 @@
   color: #3634F7;
   margin-top: 4.125rem;
   margin-bottom: 2.438rem;
+}
+
+/* responsivo - media query */
+
+@media(max-width: 414px) {
+  .fundo-page .loginpage-container {
+    width: 15rem;
+    height: 28.75rem;
+    border-radius: 0.875rem;
+    margin-top: 6.8rem;
+    margin-right: 0.9rem;
+    box-shadow: 0 0 0.625rem rgb(0 0 0 / 20%);
+    background: #fff;
+    color: rgb(99, 12, 212);
+  }
 }
