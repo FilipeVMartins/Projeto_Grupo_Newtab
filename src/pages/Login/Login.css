@@ -8,13 +8,17 @@
 
 .fundo-page button {
   cursor: pointer;
-  background: rgb(99, 12, 212);
+  background: #3633F7;
   color: #fff;
-  padding: 8px;
-  border-radius: 20px;
-  width: 150px;
-  margin-top: 20px;
+  padding: 0.688rem;
+  border-radius: 2.125rem;
+  width: 12.813rem;
+  height: 3.5rem;
+  margin-top: 1.25rem;
   transition: all 300ms;
+  margin-top: 2.813rem;
+  border: none;
+  font-size: 1.3rem;
 }
 
 .fundo-page button:hover {
@@ -32,11 +36,12 @@
 }
 
 .fundo-page .loginpage-container {
-  width: 330px;
-  height: 360px;
-  border-radius:8px;
-  margin-top: 154px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 33.313rem;
+  height: 38rem;
+  border-radius: 0.875rem;
+  margin-top: 6.8rem;
+  margin-right: 0.9rem;
+  box-shadow: 0 0 0.625rem rgb(0 0 0 / 20%);
   background: #fff;
   color: rgb(99, 12, 212);
 }
@@ -45,23 +50,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
-}
-
-.loginpage-container form h2 {
-  margin-bottom: 30px;
+  margin-top: 4.125rem;
 }
 
 .loginpage-container form input {
-  height: 40px;
-  font-size: 1rem;
+  height: 2.5rem;
+  font-size: 1.3rem;
   border-top: none;
   border-left: none;
   border-right: none;
-  padding: 0 5px;
-  width: 280px;
+  padding: 0 0.313rem;
+  width: 28.553rem;
+  margin-top: 1.563rem;
 }
 
 .loginpage-container form label {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+}
+
+.loginpage-container form h1 {
+  color: #3634F7;
+  margin-top: 4.125rem;
+  margin-bottom: 2.438rem;
 }
