@@ -17,7 +17,108 @@ import './Home.css';
 
 export default class Home extends React.Component {
 
+
+
+
+  state = {
+    searchedString: 'arvore',
+    twitterImages: null,
+    twitterPosts: null
+  }
+
+
+
+  componentDidMount () {
+    this.getTwitterPosts();
+    this.getTwitterImages();
+  }
+
+
+  getTwitterImages = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({twitterImages:result});
+      })
+      .catch(error => console.log('error on getting twitter images ', error));
+
+  }
+
+  getTwitterPosts = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote -has:links&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({twitterPosts:result});
+      })
+      .catch(error => console.log('error on getting twitter posts ', error));
+  }
+
+  // get user data from posts requests by id
+  getUserPostData(userId) {
+    let foundUser = null;
+
+    this.state.twitterPosts.includes.users.forEach(user => {
+      if (userId === user.id){
+        foundUser = user;
+      };
+    });
+
+    return foundUser
+  };
+
+  // get user data from images requests by id
+  getUserImageData(userId) {
+    let foundUser = null;
+    
+    this.state.twitterImages.includes.users.forEach(user => {
+      if (userId === user.id){
+        foundUser = user;
+      };
+    });
+
+    return foundUser
+  };
+
+  // get media data from images requests by media keys
+  getMediaData(mediaKey) {
+    let foundMedia = null;
+
+    this.state.twitterImages.includes.media.forEach(media => {
+      if (mediaKey === media.media_key){
+        foundMedia = media;
+      };
+    });
+
+    return foundMedia
+  };
+
+
+
+
+
+
+
   render() {
+    let user;
+    let media;
     
 
     return (
@@ -54,7 +155,18 @@ export default class Home extends React.Component {
 
           <div className="carousel-section-wrapper">
             <div className="carousel-section">
-              <ImageResult imageSrc={'https://picsum.photos/id/234/160/228'} atUsername="@twitterusername" ></ImageResult>
+              {
+              this.state.twitterImages !== null ?  
+              Object.entries(this.state.twitterImages.data).map(([index, post]) => {
+                user = this.getUserImageData(post.author_id);
+                media = this.getMediaData(post.attachments.media_keys[0])
+                return (
+                  <ImageResult imageSrc={media.url} atUsername={user.username} postId={post.id}></ImageResult>
+                );
+              })
+              : ''
+              }
+              {/* <ImageResult imageSrc={'https://picsum.photos/id/234/160/228'} atUsername="@twitterusername" ></ImageResult>
               <ImageResult imageSrc={'https://picsum.photos/id/233/160/228'} atUsername="@twitterusername" ></ImageResult>
               <ImageResult imageSrc={'https://picsum.photos/id/232/160/228'} atUsername="@twitterusername" ></ImageResult>
               <ImageResult imageSrc={'https://picsum.photos/id/231/160/228'} atUsername="@twitterusername" ></ImageResult>
@@ -63,7 +175,7 @@ export default class Home extends React.Component {
               <ImageResult imageSrc={'https://picsum.photos/id/228/160/228'} atUsername="@twitterusername" ></ImageResult>
               <ImageResult imageSrc={'https://picsum.photos/id/227/160/228'} atUsername="@twitterusername" ></ImageResult>
               <ImageResult imageSrc={'https://picsum.photos/id/223/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/225/160/228'} atUsername="@twitterusername" ></ImageResult>          
+              <ImageResult imageSrc={'https://picsum.photos/id/225/160/228'} atUsername="@twitterusername" ></ImageResult>           */}
             </div>
 
 
@@ -88,19 +200,47 @@ export default class Home extends React.Component {
 
           <div className="posts-section-wrapper">
             <div className="posts-section">
-              <PostResult avatarSrc={'https://picsum.photos/id/237/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
+              {
+              this.state.twitterPosts !== null ?  
+              Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
+                // rule to avoid printing odd indexes
+                if ( index % 2 !== 0 ){
+                  return false
+                }
+                user = this.getUserPostData(post.author_id);
+                return (
+                  <PostResult avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
+                );
+              })
+              : ''
+              }
+              {/* <PostResult avatarSrc={'https://picsum.photos/id/237/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/238/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/239/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/240/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/241/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult>
+              <PostResult avatarSrc={'https://picsum.photos/id/241/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult> */}
             </div>
 
             <div className="posts-section">
-              <PostResult avatarSrc={'https://picsum.photos/id/242/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
+            {
+              this.state.twitterPosts !== null ?  
+              Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
+                // rule to avoid printing even indexes
+                if ( index % 2 === 0 ){
+                  return false
+                }
+                user = this.getUserPostData(post.author_id);
+                return (
+                  <PostResult avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
+                );
+              })
+              : ''
+              }
+              {/* <PostResult avatarSrc={'https://picsum.photos/id/242/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/243/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/244/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
               <PostResult avatarSrc={'https://picsum.photos/id/247/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/248/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult>
+              <PostResult avatarSrc={'https://picsum.photos/id/248/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult> */}
             </div>
           </div>
 

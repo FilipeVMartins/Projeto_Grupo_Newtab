@@ -33,6 +33,15 @@
     left: 0.938rem;
 }
 
+.image-item .post-link {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.image-item .post-link:hover {
+    text-decoration: underline;
+}
+
 
 @media screen and (min-width: 660px){
 
