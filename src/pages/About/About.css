@@ -1,92 +1,92 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Rubik', sans-serif;
-}
 
 /*header*/
 .about-content{
     width: 100vw;
     height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 .about-header{
     background-image: url(../../images/layout1/about-bg.jpg);
     width: 100%;
-    height: 422px;
+    height: 26.375em;
     background-size: cover;
 }
 
-.header{
+.header{    
     width: 93%;
 }
 
 .about-sobre {
     color: #ffff;
-    font-size: 90px;
+    font-size: 5.625em;
     margin-top: 8.25rem;
-    padding-left: 140px;
+    padding-left: 8.75rem;
 }
 
 /*descrição do projeto projeto*/
 .about-aside{
-    width: 48%;
-    padding-right: 10%;
+    width: 35.8125em;
+    padding-right: 12.875em;
 }
 
 .about-aside h3{
     color: #3634F7;
-    font-size: 44px;
-    margin-bottom: 25px;
+    margin-top: 0;
+    font-size: 2.75em;
+    margin-bottom: 1.5625rem;
 }
 
 .about-aside p{
+    text-align: left;
+    letter-spacing: 0px;
     color: #292929;
-    font-size: 25px;
+    font-size: 1.5625em;
 }
 
 .about-projeto{
-    padding-top: 193px;
+    padding-top: 12.0625rem;
     text-align: left;
-    width: 80%;
+    width: 96.625rem;
     align-items: flex-start;
     margin: 0 auto;
     display: flex;
 }
 
 .about-svg {
-    width: 42%;
+    width: 39.75rem;
 }
 
 /*quem somos nós*/
 .about-we{
-    padding-top: 193px;
+    padding-top: 12.0625rem;
     color: #3634F7;
-    font-size: 44px;
-    padding-bottom: 66px;
-    width: 80%;
+    font-size: 2.75em;
+    padding-bottom: 4.125rem;
+    width: 96.625rem;
     margin: 0 auto;
 }
 
 .about-team{
-    padding-bottom: 165px;
-    width: 90%;
+    padding-bottom: 10.3125rem;
+    width: 108.875rem;
     display: flex;
     margin: 0 auto;
 }
 
 /*cards da equipe*/
 .about-card{
-    width: 398px;
+    width: 24.875rem;
     box-shadow: 0px 5px 10px #5538EE14;
     border-radius: 10px;
-    margin-right: 50px;
+    margin-right: 3.125rem;
     border: 1px solid #5538EE24;
-    height: 525px;
+    height: 32.8125rem;
 }
 
 .about-team-content{
-    width: 308px;
+    width: 19.25rem;
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -94,26 +94,28 @@
 }
 
 .about-simulation-foto{
-    height: 203px;
-    width: 203px;
-    margin-bottom: 25px;
-    margin-top: 40px;
+    height: 12.6875rem;
+    width: 12.6875rem;
+    margin-bottom: 1.5625rem;
+    margin-top: 2.5rem;
     border-radius: 100px;
     background-color: black;
 }
 
 .about-card h2{
     color: #292929;
-    font-size: 32px;
+    font-size: 2em;
+    margin-top: 0;
     text-align:left;
-    margin-bottom: 25px;
+    margin-bottom: 1.5625rem;
 }
 
 .about-card p{
     color: #292929;
-    font-size: 19px;
+    margin-top: 0;
+    font-size: 1.1875rem;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 1.75rem;
     letter-spacing: 0.23px;
 }
 
@@ -122,13 +124,13 @@
 }
 
 .about-socials .fab{
-    font-size: 25px;
-    margin-right: 33px;
+    font-size: 1.5625rem;   
+    margin-right: 2.0625rem;
 }
 
 .about-socials .fas{
-    font-size: 25px;
-    margin-right: 33px;
+    font-size: 1.5625rem;
+    margin-right: 2.0625rem;
 }
 
 .about-socials a{
@@ -140,11 +142,11 @@
 @media(max-width: 600px){
     /* reponsividade header*/
     .about-header {
-        height: 206px;
+        height: 12.875rem;
     }
 
     .about-sobre{
-        font-size: 33px;
+        font-size: 2.0625em;
         width: 100%;
         margin-top: 0.875rem;
         padding-left: 0;
@@ -152,7 +154,7 @@
     }
     /* reponsividade descrição do projeto*/
     .about-projeto {
-        padding-top: 55px;
+        padding-top: 3.4375rem;
         width: 82%;
         flex-direction: column;
     }
@@ -160,16 +162,16 @@
     .about-aside {
         width: 100%;
         padding-right: 0;
-        margin-bottom: 46px;
+        margin-bottom: 2.875rem;
     }
 
     .about-aside h3 {
-        font-size: 29px;
-        margin-bottom: 15px;
+        font-size: 1.6875em;
+        margin-bottom: 0.9375rem;
     }
 
     .about-aside p {
-        font-size: 15px;
+        font-size: 0.9375em;
     }
 
     .about-svg {
@@ -177,14 +179,14 @@
     }
     /*reponsividade seção quem somos nós*/
     .about-we {
-        padding-top: 112px;
-        padding-bottom: 46px;
-        font-size: 22px;
+        padding-top: 7.0625rem;
+        padding-bottom: 2.875rem;
+        font-size: 1.375em;
         width: 82%;
     }
 
     .about-team {
-        padding-bottom: 28px;
+        padding-bottom: 1.75rem;
         width: 86%;
         flex-direction: column;
     }
@@ -192,15 +194,15 @@
     .about-card {
         width: 100%;
         margin-right: 0px;
-        height: initial;
-        margin-bottom: 46px;
+        height: initial;    
+        margin-bottom: 2.875rem;
     }
 
     .about-simulation-foto {
-        height: 182px;
-        width: 182px;
-        margin-top: 36px;
-        margin-bottom: 22px;
+        height: 11.375rem;
+        width: 11.375rem;
+        margin-top: 2.25rem;
+        margin-bottom: 1.375em;
     }
 
     .about-card h2 {

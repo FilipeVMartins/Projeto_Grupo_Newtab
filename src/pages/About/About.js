@@ -105,8 +105,6 @@ export default class About extends React.Component {
            <Footer/>
           </footer>
       </div>
-
-
     );
   };
 };
