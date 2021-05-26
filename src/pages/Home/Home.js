@@ -28,7 +28,9 @@ export default class Home extends React.Component {
 
     //clickedImageTweetID: '',
     clickedImageProps: null,
-    maximizedImageDisplay: 'none'
+    maximizedImageDisplay: 'none',
+
+    carouselPointer: 0
   }
 
 
@@ -129,6 +131,67 @@ export default class Home extends React.Component {
     this.setState({maximizedImageDisplay: 'none'})
   }
 
+  // this will passively update the state of the carousel based on scroll event calls
+  handleCarouselSideScroll = (event) => {
+    let element = event.target;
+    
+    // check if view is at the start of the side scroll
+    if ( element.scrollLeft === 0) {
+      this.setState({carouselPointer: 0})
+    } else
+
+    // check if view is somewhere between the start and end of the side scroll
+    if ((element.scrollLeft >= 0) && ( element.scrollLeft + element.clientWidth < element.scrollWidth )){
+      this.setState({carouselPointer: 1})
+    } else
+
+    // check if view is at the end of the side scroll
+    if (element.scrollWidth - element.scrollLeft === element.clientWidth) {
+      this.setState({carouselPointer: 2})
+    }
+  }
+
+  // this is what will actually control the state of the carousel through scroll event actions
+  clickScrollDot = (ScrollDotIndex) => {
+    let carouselElement = document.querySelector('.home-content .carousel-section');
+    
+    if (ScrollDotIndex === 0) {
+      console.log('aaa')
+      carouselElement.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+    } else
+
+    if (ScrollDotIndex === 1) {
+      carouselElement.scrollTo({
+        left: (carouselElement.scrollWidth/2)-(carouselElement.clientWidth/2),
+        behavior: 'smooth'
+        });
+    } else
+
+    if (ScrollDotIndex === 2) {
+      carouselElement.scrollTo({
+        left: carouselElement.scrollWidth,
+        behavior: 'smooth'
+      });
+    };
+  };
+
+  // this function is based on the 'clickScrollDot' function, gives it's functionality to the arrow buttons 
+  carouselArrowClick = (toNextIndex) => {
+    if (this.state.carouselPointer === 0 && toNextIndex === -1) {
+      this.clickScrollDot(2)
+    } else
+
+    if (this.state.carouselPointer === 2 && toNextIndex === 1) {
+      this.clickScrollDot(0)
+
+    } else {
+      this.clickScrollDot(this.state.carouselPointer + toNextIndex)
+    } 
+  };
+
 
 
 
@@ -173,7 +236,7 @@ export default class Home extends React.Component {
 
 
           <div className="carousel-section-wrapper">
-            <div className="carousel-section">
+            <div className="carousel-section" onScroll={this.handleCarouselSideScroll} >
               {
               this.state.twitterImages !== null ?  
               Object.entries(this.state.twitterImages.data).map(([index, post]) => {
@@ -198,19 +261,19 @@ export default class Home extends React.Component {
             </div>
 
 
-            <div className="carousel-arrows-wrapper arrow-wrapper-left">
+            <div className="carousel-arrows-wrapper arrow-wrapper-left" onClick={() => this.carouselArrowClick(-1)}>
               <ArrowLeftIcon className="carousel-arrows carousel-left-arrow" />
             </div>
             
 
-            <div className="carousel-arrows-wrapper arrow-wrapper-right">
+            <div className="carousel-arrows-wrapper arrow-wrapper-right" onClick={() => this.carouselArrowClick(1)}>
               <ArrowRightIcon className="carousel-arrows carousel-right-arrow" />
             </div >
 
             <div className="three-dots-wrapper">
-              <div className="scroll-dot" ></div>
-              <div className="scroll-dot" ></div>
-              <div className="scroll-dot" ></div>
+              <div className="scroll-dot" style={{backgroundColor: this.state.carouselPointer === 0 ? '#3634F7' : ''}} onClick={() => this.clickScrollDot(0)} ></div>
+              <div className="scroll-dot" style={{backgroundColor: this.state.carouselPointer === 1 ? '#3634F7' : ''}} onClick={() => this.clickScrollDot(1)} ></div>
+              <div className="scroll-dot" style={{backgroundColor: this.state.carouselPointer === 2 ? '#3634F7' : ''}} onClick={() => this.clickScrollDot(2)} ></div>
             </div>
           </div>
 

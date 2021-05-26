@@ -7,8 +7,7 @@ import './MaximizedImage.css';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
-    console.log(props)
-
+    //console.log(props)
 
     if (props.clickedImageProps){
         return (
@@ -31,7 +30,7 @@ export default (props) => {
                             </div>
                             
                             <p className="post-paragraph">{props.clickedImageProps.postParagraph}</p>
-                            <a target="_blank" rel="noreferrer" href={`https://twitter.com/user/status/${props.postId}`} className="seemore-link">Ver mais no Twitter</a>
+                            <a target="_blank" rel="noreferrer" href={`https://twitter.com/user/status/${props.clickedImageProps.postId}`} className="seemore-link">Ver mais no Twitter</a>
                         </div>
                     </div>
                     <CloseIcon className="close-icon" onClick={() => props.hideClickedImage()}></CloseIcon>
