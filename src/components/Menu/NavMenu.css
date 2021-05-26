@@ -48,6 +48,11 @@ nav.app-nav .nav-link {
     cursor: pointer;
 }
 
+nav.app-nav .nav-link:hover {
+    text-decoration: underline;
+    border: 1px solid #ffffff;
+}
+
 nav.app-nav .margin-between-bluepink {
     width: 0.813rem;
 }

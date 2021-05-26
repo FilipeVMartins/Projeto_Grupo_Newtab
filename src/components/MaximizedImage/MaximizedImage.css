@@ -1,0 +1,183 @@
+
+
+.maximized-image {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+}
+
+.maximized-image .screen-block {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 15;
+    cursor: zoom-out;
+}
+
+.maximized-image .maximized-box {
+    max-width: 90%;
+    max-height: 99vh;
+    background-color: #ffffff;
+    z-index: 15;
+    position: fixed;
+    top: 50vh;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 1.313rem;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.maximized-image .maximized-box figure.maximized-figure {
+    all: unset;
+}
+
+.maximized-image .maximized-box figure.maximized-figure img.maximized-image-result {
+    max-width: 90vw;
+    height: auto;
+    max-height: 70vh;
+}
+
+.maximized-image .maximized-box .image-post-details {
+    z-index: 15;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+
+.maximized-image .maximized-box .image-post-details img {
+    margin: 1.25rem 0.938rem;
+    border-radius: 50%;
+    width: 3.375rem;
+    height: 3.313rem;
+}
+
+
+.maximized-image .maximized-box .image-post-details .image-post-details-text {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    max-width: calc(100% - 5.5rem);
+}
+
+.maximized-image .maximized-box .image-post-details .username {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 0.438rem;
+    
+}
+
+.maximized-image .maximized-box .image-post-details .name {
+    margin-right: 0.625rem;
+    font-size: 0.813rem;
+    color: #292929;
+}
+.maximized-image .maximized-box .image-post-details .atusername {
+    font-size: 0.563rem;
+    font-weight: normal;
+    color: #292929;
+    opacity: 0.43;
+}
+
+.maximized-image .maximized-box .image-post-details .post-paragraph {
+    margin-bottom: 1.25rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: normal;
+    letter-spacing: 0.009rem;
+    color: #292929;
+}
+
+.maximized-image .maximized-box .image-post-details .seemore-link {
+    font-size: 0.625rem;
+    color: #3634F7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.maximized-image .maximized-box .image-post-details .seemore-link:hover {
+    text-decoration: underline;
+}
+
+.close-icon {
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close-icon:hover {
+    opacity: 0.5;
+}
+
+
+@media screen and (min-width: 660px){
+
+    .maximized-image .maximized-box {
+        border-radius: 1.313rem;
+    }
+    
+    .maximized-image .maximized-box figure.maximized-figure img.maximized-image-result {
+        max-width: 90vw;
+        height: auto;
+        max-height: 70vh;
+    }
+
+    .maximized-image .maximized-box .image-post-details img {
+        margin: 2.625rem 3.313rem;
+        width: 5.125rem;
+        height: 5.125rem;
+    }
+    
+    .maximized-image .maximized-box .image-post-details .image-post-details-text {
+        margin: 2.625rem 0rem 2.563rem 0px; /* Top, Right, Bottom, Left */
+        width: calc(100% - 15.5rem);
+    }
+    
+    .maximized-image .maximized-box .image-post-details .username {
+        margin-bottom: 0.438rem;
+    }
+    
+    .maximized-image .maximized-box .image-post-details .name {
+        margin-right: 1.063rem;
+        font-size: 1.688rem;
+    }
+    .maximized-image .maximized-box .image-post-details .atusername {
+        font-size: 1.25rem;
+    }
+    
+    .maximized-image .maximized-box .image-post-details .post-paragraph {
+        margin-bottom: 2.563rem;
+        font-size: 1.188rem;
+        letter-spacing: 0.014rem;
+    }
+    
+    .maximized-image .maximized-box .image-post-details .seemore-link {
+        font-size: 1.25rem;
+    }
+
+    .close-icon {
+        height: 2.5rem;
+        width: 2.5rem;
+        top: 0.7rem;
+        right: 0.7rem;
+    }
+}

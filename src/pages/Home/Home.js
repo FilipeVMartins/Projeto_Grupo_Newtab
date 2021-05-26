@@ -5,6 +5,7 @@ import { ReactComponent as ArrowLeftIcon } from '../../images/layout1/icon-arrow
 import { ReactComponent as ArrowRightIcon } from '../../images/layout1/icon-arrow-right.svg';
 import PostResult from '../../components/PostResult/PostResult';
 import ImageResult from '../../components/ImageResult/ImageResult';
+import MaximizedImage from '../../components/MaximizedImage/MaximizedImage';
 import Footer from '../../components/Footer/Footer';
 
 import NavMenu from '../../components/Menu/NavMenu';
@@ -23,7 +24,11 @@ export default class Home extends React.Component {
   state = {
     searchedString: 'arvore',
     twitterImages: null,
-    twitterPosts: null
+    twitterPosts: null,
+
+    //clickedImageTweetID: '',
+    clickedImageProps: null,
+    maximizedImageDisplay: 'none'
   }
 
 
@@ -87,7 +92,7 @@ export default class Home extends React.Component {
   // get user data from images requests by id
   getUserImageData(userId) {
     let foundUser = null;
-    
+
     this.state.twitterImages.includes.users.forEach(user => {
       if (userId === user.id){
         foundUser = user;
@@ -109,6 +114,20 @@ export default class Home extends React.Component {
 
     return foundMedia
   };
+
+  maximizeClickedImage = (clickedImageProps) => {
+    
+    console.log(clickedImageProps)
+    // sets the props states of the image to be maximized
+    this.setState({clickedImageProps:clickedImageProps})
+
+    // sets maximized component style state visible
+    this.setState({maximizedImageDisplay: 'flex'})
+  }
+
+  hideClickedImage = () => {
+    this.setState({maximizedImageDisplay: 'none'})
+  }
 
 
 
@@ -161,8 +180,8 @@ export default class Home extends React.Component {
                 user = this.getUserImageData(post.author_id);
                 media = this.getMediaData(post.attachments.media_keys[0])
                 return (
-                  <ImageResult imageSrc={media.url} atUsername={user.username} postId={post.id}></ImageResult>
-                );
+                  <ImageResult key={'ImageResult-' + index} maximizeClickedImage={this.maximizeClickedImage} imageSrc={media.url} atUsername={user.username} postId={post.id} avatarSrc={user.profile_image_url} name={user.name} postParagraph={post.text}></ImageResult>
+                );                         
               })
               : ''
               }
@@ -179,13 +198,10 @@ export default class Home extends React.Component {
             </div>
 
 
-
-
             <div className="carousel-arrows-wrapper arrow-wrapper-left">
               <ArrowLeftIcon className="carousel-arrows carousel-left-arrow" />
             </div>
             
-
 
             <div className="carousel-arrows-wrapper arrow-wrapper-right">
               <ArrowRightIcon className="carousel-arrows carousel-right-arrow" />
@@ -209,7 +225,7 @@ export default class Home extends React.Component {
                 }
                 user = this.getUserPostData(post.author_id);
                 return (
-                  <PostResult avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
+                  <PostResult key={'PostResult-even-' + index} avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
                 );
               })
               : ''
@@ -231,7 +247,7 @@ export default class Home extends React.Component {
                 }
                 user = this.getUserPostData(post.author_id);
                 return (
-                  <PostResult avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
+                  <PostResult key={'PostResult-odd-' + index} avatarSrc={user.profile_image_url} name={user.name} attwitterusername={user.username} postParagraph={post.text} postId={post.id}></PostResult>
                 );
               })
               : ''
@@ -246,7 +262,7 @@ export default class Home extends React.Component {
 
 
         </div>
-        
+        <MaximizedImage hideClickedImage={this.hideClickedImage} maximizedImageDisplay={this.state.maximizedImageDisplay} clickedImageProps={this.state.clickedImageProps} ></MaximizedImage>
         <Footer></Footer>
       </div>
     );
