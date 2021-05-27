@@ -3,7 +3,7 @@
     background-color: #D842BD;
     display: flex;
     align-items: center;
-    height: 200px;
+    height: 12.5rem;
     justify-content: center;
 }
 .footerText{
@@ -13,9 +13,9 @@
 }
 /* Desktop */
 .footerTextDesktop{
-    font-size:25px;
+    font-size:1.5625rem;
 }
 /* Mobile */
 .footerTextMobile{
-    font-size:10px;
+    font-size:0.625rem;
 }

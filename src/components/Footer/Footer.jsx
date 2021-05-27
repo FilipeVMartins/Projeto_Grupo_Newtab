@@ -5,7 +5,7 @@ import useWindowDimensions from "../WindowsDimension/useWindowDimensions"
 
 function Footer(){
     const {width} = useWindowDimensions();
-    const platform =  width>1000 ? "Desktop" : "Mobile";
+    const platform =  width>660 ? "Desktop" : "Mobile";
     return(
         <div className="footerBackground">
             <span className={"footerText footerText"+platform}>

@@ -7,10 +7,10 @@ import PostResult from '../../components/PostResult/PostResult';
 import ImageResult from '../../components/ImageResult/ImageResult';
 import MaximizedImage from '../../components/MaximizedImage/MaximizedImage';
 import Footer from '../../components/Footer/Footer';
-
 import NavMenu from '../../components/Menu/NavMenu';
 
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import './Home.css';
 
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
 
   state = {
-    searchedString: 'natureza',
+    searchedString: '',
     twitterImages: null,
     twitterPosts: null,
 
@@ -36,12 +36,10 @@ export default class Home extends React.Component {
 
 
   componentDidMount () {
-    this.getTwitterPosts();
-    this.getTwitterImages();
   }
 
 
-  getTwitterImages = () => {
+  getTwitterImages = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
 
@@ -51,7 +49,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterImages:result});
@@ -60,7 +58,7 @@ export default class Home extends React.Component {
 
   }
 
-  getTwitterPosts = () => {
+  getTwitterPosts = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
 
@@ -70,7 +68,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote -has:links&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${searchedStringSanitized} has:hashtags -is:retweet -is:quote -has:links&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterPosts:result});
@@ -192,6 +190,27 @@ export default class Home extends React.Component {
     } 
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    // validations
+    if (this.state.searchedString.length === 0) {
+      toast.error('O campo de busca não pode estar vazio!');
+    } else
+    if (this.state.searchedString.length > 140) {
+      toast.error('Sua busca deve conter menos de 140 caracteres!');
+    };
+
+    // cleans characters that could interfere with the search
+    let searchedStringSanitized = this.state.searchedString.replace(/[#$@:-]/g,'');
+
+    console.log(searchedStringSanitized);
+
+    this.getTwitterImages(searchedStringSanitized);
+    this.getTwitterPosts(searchedStringSanitized);
+    
+  };
+
 
 
 
@@ -218,8 +237,8 @@ export default class Home extends React.Component {
 
             <div className="home-input-wrapper">
               <SearchIcon className="search-icon" />
-              <form>
-                <input placeholder="Buscar..."></input>
+              <form onSubmit={this.handleSubmit}>
+                <input placeholder="Buscar..." value={this.state.searchedString} onChange={event => this.setState({searchedString: event.target.value})}></input>
               </form>
             </div>
           </div>
@@ -227,15 +246,15 @@ export default class Home extends React.Component {
         </div>
 
 
-        <div className="home-results">
+        <div className="home-results" >
 
 
-          <div className="results-title">
+          <div className="results-title" style={{display: this.state.twitterImages ? 'block' : 'none'}}>
             <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2>
           </div>
 
 
-          <div className="carousel-section-wrapper">
+          <div className="carousel-section-wrapper" style={{display: this.state.twitterImages ? 'flex' : 'none'}}>
             <div className="carousel-section" onScroll={this.handleCarouselSideScroll} >
               {
               this.state.twitterImages !== null ?  
@@ -325,8 +344,12 @@ export default class Home extends React.Component {
 
 
         </div>
+        
         <MaximizedImage hideClickedImage={this.hideClickedImage} maximizedImageDisplay={this.state.maximizedImageDisplay} clickedImageProps={this.state.clickedImageProps} ></MaximizedImage>
-        <Footer></Footer>
+
+        <div className="footer-wrapper" style={{marginTop: this.state.twitterImages ? '0rem' : '63vh'}}>
+          <Footer></Footer>
+        </div>
       </div>
     );
   };
