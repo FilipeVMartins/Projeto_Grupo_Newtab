@@ -78,15 +78,32 @@
 
 /* responsivo - media query */
 
-@media(max-width: 414px) {
+@media all and (min-width: 320px) and (max-width: 414px) {
   .fundo-page .loginpage-container {
-    width: 15rem;
+    width: 21.25rem;
     height: 28.75rem;
-    border-radius: 0.875rem;
-    margin-top: 6.8rem;
-    margin-right: 0.9rem;
-    box-shadow: 0 0 0.625rem rgb(0 0 0 / 20%);
-    background: #fff;
-    color: rgb(99, 12, 212);
+  }
+
+  .loginpage-container form input {
+    width: 20rem;
+  }
+
+  .loginpage-container form h1 {
+    margin-top: 0.125rem;
+  }  
+}
+
+@media all and (min-width: 415px) and (max-width: 768px) {
+  .fundo-page .loginpage-container {
+    width: 22.313rem;
+    height: 29rem;
+  }
+
+  .loginpage-container form input {
+    width: 19.553rem;
+  }
+
+  .loginpage-container form {
+    margin-top: 0;
   }
 }

@@ -22,9 +22,9 @@ export default function Login() {
       toast.error('E-mail inválido!');
     }
 
-    if (password.length <= 5 || password.length >= 20) {
+    if (password.length <= 5 || password.length >= 10) {
       formErrors = true;
-      toast.error('Senha deve ter entre 6 e 20 caracteres!');
+      toast.error('Senha deve ter entre 6 e 10 caracteres!');
       console.log(formErrors);
     }
   }
@@ -39,7 +39,7 @@ export default function Login() {
 
           <label htmlFor="email">
             <input 
-              type="email" 
+              type="text" 
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="Usuário"
