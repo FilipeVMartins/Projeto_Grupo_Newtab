@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
 
   state = {
-    searchedString: 'arvore',
+    searchedString: 'natureza',
     twitterImages: null,
     twitterPosts: null,
 
