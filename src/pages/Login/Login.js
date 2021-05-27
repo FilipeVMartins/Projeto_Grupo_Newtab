@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import NavMenu from '../../components/Menu/NavMenu';
 
@@ -30,12 +31,11 @@ export default function Login() {
   
   return (
     <div className="fundo-page">
-      <NavMenu />      
+      <NavMenu />
       
-      <div className="loginpage-container">
-        
+      <div className="loginpage-container">        
         <form onSubmit={handleSubmit}>
-          <h2>Login</h2>
+          <h1>Login</h1>
 
           <label htmlFor="email">
             <input 
@@ -55,7 +55,7 @@ export default function Login() {
             />
           </label>
 
-          <button type="submit">ACESSAR</button>
+          <button type="submit"><span>ACESSAR</span></button>
         </form>
       </div>    
     </div>  
