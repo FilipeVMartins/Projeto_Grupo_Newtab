@@ -36,6 +36,7 @@ export default class Home extends React.Component {
 
 
   componentDidMount () {
+    //console.log(typeof (this.state.twitterPosts.data) )
   }
 
 
@@ -204,11 +205,44 @@ export default class Home extends React.Component {
     // cleans characters that could interfere with the search
     let searchedStringSanitized = this.state.searchedString.replace(/[#$@:-]/g,'');
 
-    console.log(searchedStringSanitized);
+
+
+
+    let queryBuild = searchedStringSanitized.split(" ");
+
+
+
+
+
+
+
+
+
+
+    console.log(queryBuild);
 
     this.getTwitterImages(searchedStringSanitized);
     this.getTwitterPosts(searchedStringSanitized);
     
+  };
+
+  checkResults() {
+    // if there is at least one successful request response
+    if (this.state.twitterImages) {
+      // if there is at least one nested object that is not 'undefined'
+      if ((typeof this.state.twitterImages.data !== 'undefined')){
+        return true
+      };
+    }
+    // if there is at least one successful request response
+    if (this.state.twitterPosts) {
+      // if there is at least one nested object that is not 'undefined'
+      if ((typeof this.state.twitterPosts.data !== 'undefined')){
+        return true
+      };
+    };
+    // else
+    return false;
   };
 
 
@@ -249,15 +283,16 @@ export default class Home extends React.Component {
         <div className="home-results" >
 
 
-          <div className="results-title" style={{display: this.state.twitterImages ? 'block' : 'none'}}>
-            <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2>
+          <div className="results-title" style={{display: this.state.twitterImages || this.state.twitterPosts ? 'block' : 'none'}}>
+            
+            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
           </div>
 
 
-          <div className="carousel-section-wrapper" style={{display: this.state.twitterImages ? 'flex' : 'none'}}>
+          <div className="carousel-section-wrapper" style={{display: this.state.twitterImages && (typeof this.state.twitterImages.data !== 'undefined') ? 'flex' : 'none'}}>
             <div className="carousel-section" onScroll={this.handleCarouselSideScroll} >
               {
-              this.state.twitterImages !== null ?  
+              this.state.twitterImages !== null && (typeof this.state.twitterImages.data !== 'undefined') ?  
               Object.entries(this.state.twitterImages.data).map(([index, post]) => {
                 user = this.getUserImageData(post.author_id);
                 media = this.getMediaData(post.attachments.media_keys[0])
@@ -299,7 +334,7 @@ export default class Home extends React.Component {
           <div className="posts-section-wrapper">
             <div className="posts-section">
               {
-              this.state.twitterPosts !== null ?  
+              this.state.twitterPosts !== null && (typeof this.state.twitterPosts.data !== 'undefined') ?  
               Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
                 // rule to avoid printing odd indexes
                 if ( index % 2 !== 0 ){
@@ -321,7 +356,7 @@ export default class Home extends React.Component {
 
             <div className="posts-section">
             {
-              this.state.twitterPosts !== null ?  
+              this.state.twitterPosts !== null && (typeof this.state.twitterPosts.data !== 'undefined') ?  
               Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
                 // rule to avoid printing even indexes
                 if ( index % 2 === 0 ){
@@ -344,10 +379,10 @@ export default class Home extends React.Component {
 
 
         </div>
-        
+
         <MaximizedImage hideClickedImage={this.hideClickedImage} maximizedImageDisplay={this.state.maximizedImageDisplay} clickedImageProps={this.state.clickedImageProps} ></MaximizedImage>
 
-        <div className="footer-wrapper" style={{marginTop: this.state.twitterImages ? '0rem' : '63vh'}}>
+        <div className="footer-wrapper" style={{marginTop: this.state.twitterImages && (typeof this.state.twitterImages.data !== 'undefined') ? '0rem' : '63vh'}}>
           <Footer></Footer>
         </div>
       </div>
