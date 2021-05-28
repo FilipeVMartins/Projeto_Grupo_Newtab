@@ -50,7 +50,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterImages:result});
@@ -202,31 +202,18 @@ export default class Home extends React.Component {
     };
 
     // cleans characters that could interfere with the search
-    let searchedStringSanitized = this.state.searchedString.replace(/[#$@:-]/g,'');
+    let searchedStringSanitized = this.state.searchedString.replace(/[#%$@:-]/g,'');
 
-
-
-
-    let queryBuild = searchedStringSanitized.split(" ");
-    queryBuild = queryBuild.map(() => {
-
+    // builds the text to be displayed on search title and searchListing with the # character, to be saved on airtables.
+    let searchDisplay = searchedStringSanitized.split(" ");
+    searchDisplay = searchDisplay.map((hashtag) => {
+      return ('#'+hashtag)
     })
-
-
-
-
-
-
-    console.log(searchedStringSanitized);
-
-
-    console.log(queryBuild);
-
-
+    searchDisplay = searchDisplay.join(' ')
 
     this.getTwitterImages(searchedStringSanitized);
     this.getTwitterPosts(searchedStringSanitized);
-    this.saveSearches(searchedStringSanitized);
+    this.saveSearches(searchDisplay);
   };
 
   checkResults() {
@@ -304,7 +291,7 @@ export default class Home extends React.Component {
       <div className="home-content">
         <div className="home-header">
           <div className="home-nav" >
-            <NavMenu />
+            <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25}/>
           </div>
 
           <div className="home-title-input-wrapper">

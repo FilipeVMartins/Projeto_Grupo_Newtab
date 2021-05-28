@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent as Logo } from '../../images/layout1/logo-white.svg';
+import { ReactComponent as LogoPink } from '../../images/layout1/logo-pink.svg';
 import HomeIcon from '../../images/layout1/icon-home.svg';
 import AboutIcon from '../../images/layout1/icon-info-circle.svg';
 import LoginIcon from '../../images/layout1/icon-user-alt.svg';
@@ -14,10 +15,17 @@ export default class NavMenu extends React.Component {
     displayHomeButton: false,
     displayAboutButton: false,
     displayLoginButton: false,
-    displayLogoutButton: false
+    displayLogoutButton: false,
+
+    transparencyMenu: false,
+    getHeaderHeight: null
   }
 
   componentDidMount (){
+    this.addTransparencyScrollEvent();
+    this.setHeaderHeight();
+    window.addEventListener('resize', this.setHeaderHeight);
+
     if (window.location.pathname === '/'){
         this.setState({displayAboutButton: true, displayLoginButton: true});
     } else
@@ -32,29 +40,63 @@ export default class NavMenu extends React.Component {
     }
   }
 
+  setHeaderHeight = () => {
+    const windowWidth= document.documentElement.clientWidth;
+    const platform = windowWidth >= 660 ? "Desktop" : "Mobile";
+
+    // rem value bsed on vw unit
+    let fontSize = (platform === 'Mobile' ) ? 3.865 : 0.833 ;
+    fontSize = windowWidth * (fontSize/100)
+    // header height in rem unit
+    let headerHeight = (platform === 'Mobile' ) ? 32.5 : 49.25 ;
+    // responsive header height in px
+    headerHeight = headerHeight * fontSize;
+
+    this.setState({headerHeight});
+  };
+
+  addTransparencyScrollEvent () {
+    document.addEventListener('scroll', () => {
+      //change state
+      if(document.documentElement.scrollTop >= this.state.headerHeight){
+        this.setState({transparencyMenu:true})
+      } else {
+        this.setState({transparencyMenu:false})
+      };
+
+    });
+  };
+
   render() {
     return (
-      <div className="nav-menu">
-          <Logo className="logo-img" />
-          <nav className="app-nav">
-            <NavLink exact to="/" className={`nav-link ${this.state.displayHomeButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
-                    <img src={HomeIcon} alt="Home Icon" />
-                    <h2>Home</h2>
-            </NavLink>
-            <NavLink exact to="/About" className={`nav-link ${this.state.displayAboutButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
-                    <img src={AboutIcon} alt="Sobre Icon" />
-                    <h2>Sobre</h2>
-            </NavLink>
-            <div className="margin-between-bluepink"></div>
-            <NavLink exact to="/Login" className={`nav-link blue-link ${this.state.displayLoginButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
-                    <img src={LoginIcon} alt="Login Icon" />
-                    <h2>Login</h2>
-            </NavLink>
-            <NavLink exact to="/Logout" className={`nav-link blue-link ${this.state.displayLogoutButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
-                    <img src={LogoutIcon} alt="Sair Icon" />
-                    <h2>Sair</h2>
-            </NavLink>
-          </nav>
+      <div className="nav-menu-wrapper-holder">
+        <div className={"nav-menu-wrapper " + (this.state.transparencyMenu ? 'fixed' : '')}>
+          <div className={(this.state.transparencyMenu ? 'transparency-scroll' : '')}></div>
+          <div className="nav-menu">
+              {this.state.transparencyMenu ? <LogoPink className="logo-img" /> : <Logo className="logo-img" /> }
+              <nav className="app-nav">
+                <NavLink exact to="/" className={`nav-link ${this.state.displayHomeButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
+                        <img src={HomeIcon} alt="Home Icon" />
+                        <h2>Home</h2>
+                </NavLink>
+                <NavLink exact to="/About" className={`nav-link ${this.state.displayAboutButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
+                        <img src={AboutIcon} alt="Sobre Icon" />
+                        <h2>Sobre</h2>
+                </NavLink>
+                <div className="margin-between-bluepink"></div>
+                <NavLink exact to="/Login" className={`nav-link blue-link ${this.state.displayLoginButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
+                        <img src={LoginIcon} alt="Login Icon" />
+                        <h2>Login</h2>
+                </NavLink>
+                <NavLink exact to="/Logout" className={`nav-link blue-link ${this.state.displayLogoutButton ? '': 'hide-link'}`} activeClassName="App-link-CurrentPage" >
+                        <img src={LogoutIcon} alt="Sair Icon" />
+                        <h2>Sair</h2>
+                </NavLink>
+              </nav>
+              
+          </div>
+          
+        </div>
       </div>
     );
   };
