@@ -7,10 +7,10 @@ import PostResult from '../../components/PostResult/PostResult';
 import ImageResult from '../../components/ImageResult/ImageResult';
 import MaximizedImage from '../../components/MaximizedImage/MaximizedImage';
 import Footer from '../../components/Footer/Footer';
-
 import NavMenu from '../../components/Menu/NavMenu';
 
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import './Home.css';
 
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
 
   state = {
-    searchedString: 'natureza',
+    searchedString: '',
     twitterImages: null,
     twitterPosts: null,
 
@@ -36,12 +36,11 @@ export default class Home extends React.Component {
 
 
   componentDidMount () {
-    this.getTwitterPosts();
-    this.getTwitterImages();
+    //console.log(typeof (this.state.twitterPosts.data) )
   }
 
 
-  getTwitterImages = () => {
+  getTwitterImages = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
 
@@ -51,7 +50,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterImages:result});
@@ -60,7 +59,7 @@ export default class Home extends React.Component {
 
   }
 
-  getTwitterPosts = () => {
+  getTwitterPosts = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
 
@@ -70,7 +69,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${this.state.searchedString} has:hashtags -is:retweet -is:quote -has:links&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query= ${searchedStringSanitized} has:hashtags -is:retweet -is:quote -has:links&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterPosts:result});
@@ -119,7 +118,7 @@ export default class Home extends React.Component {
 
   maximizeClickedImage = (clickedImageProps) => {
     
-    console.log(clickedImageProps)
+    //console.log(clickedImageProps)
     // sets the props states of the image to be maximized
     this.setState({clickedImageProps:clickedImageProps})
 
@@ -156,7 +155,6 @@ export default class Home extends React.Component {
     let carouselElement = document.querySelector('.home-content .carousel-section');
     
     if (ScrollDotIndex === 0) {
-      console.log('aaa')
       carouselElement.scrollTo({
           left: 0,
           behavior: 'smooth'
@@ -192,9 +190,95 @@ export default class Home extends React.Component {
     } 
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    // validations
+    if (this.state.searchedString.length === 0) {
+      toast.error('O campo de busca não pode estar vazio!');
+    } else
+    if (this.state.searchedString.length > 140) {
+      toast.error('Sua busca deve conter menos de 140 caracteres!');
+    };
+
+    // cleans characters that could interfere with the search
+    let searchedStringSanitized = this.state.searchedString.replace(/[#%$@:-]/g,'');
+
+    // builds the text to be displayed on search title and searchListing with the # character, to be saved on airtables.
+    let searchDisplay = searchedStringSanitized.split(" ");
+    searchDisplay = searchDisplay.map((hashtag) => {
+      return ('#'+hashtag)
+    })
+    searchDisplay = searchDisplay.join(' ')
+
+    this.getTwitterImages(searchedStringSanitized);
+    this.getTwitterPosts(searchedStringSanitized);
+    this.saveSearches(searchDisplay);
+  };
+
+  checkResults() {
+    // if there is at least one successful request response
+    if (this.state.twitterImages) {
+      // if there is at least one nested object that is not 'undefined'
+      if ((typeof this.state.twitterImages.data !== 'undefined')){
+        return true
+      };
+    }
+    // if there is at least one successful request response
+    if (this.state.twitterPosts) {
+      // if there is at least one nested object that is not 'undefined'
+      if ((typeof this.state.twitterPosts.data !== 'undefined')){
+        return true
+      };
+    };
+    // else
+    return false;
+  };
+
+  formattedDate(d = new Date()) {
+    return [d.getDate(), d.getMonth()+1, d.getFullYear()]
+        // add zeros when n < than 10, return a new array
+        .map(n => n < 10 ? `0${n}` : `${n}`)
+        // join the pevious array into a string and return it
+        .join('/');
+  }
+
+  formattedHour(d = new Date()) {
+    return [d.getHours(), d.getMinutes()]
+        // add zeros when n < than 10, return a new array
+        .map(n => n < 10 ? `0${n}` : `${n}`)
+        // join the pevious array into a string and return it
+        .join(':');
+  }
+
+  saveSearches (searchedString) {
+
+    let body = JSON.stringify({
+        "records": [
+            {
+            "fields": {
+                "Squad": "1",
+                "Hashtag": searchedString,
+                "Data": this.formattedDate(),
+                "Hora": this.formattedHour()
+                }
+            }
+        ]
+    });
+
+    fetch('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas', {
+        method: 'POST',
+        headers: {
+            authorization: 'Bearer key2CwkHb0CKumjuM',
+            'content-type': 'application/json'
+        },
+        body: body
+    });
+};
 
 
 
+//backlog listar hashs procuradas no title
 
 
 
@@ -207,7 +291,7 @@ export default class Home extends React.Component {
       <div className="home-content">
         <div className="home-header">
           <div className="home-nav" >
-            <NavMenu />
+            <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25}/>
           </div>
 
           <div className="home-title-input-wrapper">
@@ -218,8 +302,8 @@ export default class Home extends React.Component {
 
             <div className="home-input-wrapper">
               <SearchIcon className="search-icon" />
-              <form>
-                <input placeholder="Buscar..."></input>
+              <form onSubmit={this.handleSubmit}>
+                <input placeholder="Buscar..." value={this.state.searchedString} onChange={event => this.setState({searchedString: event.target.value})}></input>
               </form>
             </div>
           </div>
@@ -227,18 +311,19 @@ export default class Home extends React.Component {
         </div>
 
 
-        <div className="home-results">
+        <div className="home-results" >
 
 
-          <div className="results-title">
-            <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2>
+          <div className="results-title" style={{display: this.state.twitterImages || this.state.twitterPosts ? 'block' : 'none'}}>
+            
+            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
           </div>
 
 
-          <div className="carousel-section-wrapper">
+          <div className="carousel-section-wrapper" style={{display: this.state.twitterImages && (typeof this.state.twitterImages.data !== 'undefined') ? 'flex' : 'none'}}>
             <div className="carousel-section" onScroll={this.handleCarouselSideScroll} >
               {
-              this.state.twitterImages !== null ?  
+              this.state.twitterImages !== null && (typeof this.state.twitterImages.data !== 'undefined') ?  
               Object.entries(this.state.twitterImages.data).map(([index, post]) => {
                 user = this.getUserImageData(post.author_id);
                 media = this.getMediaData(post.attachments.media_keys[0])
@@ -280,7 +365,7 @@ export default class Home extends React.Component {
           <div className="posts-section-wrapper">
             <div className="posts-section">
               {
-              this.state.twitterPosts !== null ?  
+              this.state.twitterPosts !== null && (typeof this.state.twitterPosts.data !== 'undefined') ?  
               Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
                 // rule to avoid printing odd indexes
                 if ( index % 2 !== 0 ){
@@ -302,7 +387,7 @@ export default class Home extends React.Component {
 
             <div className="posts-section">
             {
-              this.state.twitterPosts !== null ?  
+              this.state.twitterPosts !== null && (typeof this.state.twitterPosts.data !== 'undefined') ?  
               Object.entries(this.state.twitterPosts.data).map(([index, post]) => {
                 // rule to avoid printing even indexes
                 if ( index % 2 === 0 ){
@@ -325,8 +410,12 @@ export default class Home extends React.Component {
 
 
         </div>
+
         <MaximizedImage hideClickedImage={this.hideClickedImage} maximizedImageDisplay={this.state.maximizedImageDisplay} clickedImageProps={this.state.clickedImageProps} ></MaximizedImage>
-        <Footer></Footer>
+
+        <div className="footer-wrapper" style={{marginTop: this.state.twitterImages && (typeof this.state.twitterImages.data !== 'undefined') ? '0rem' : '63vh'}}>
+          <Footer></Footer>
+        </div>
       </div>
     );
   };

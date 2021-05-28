@@ -10,10 +10,42 @@ div.nav-menu {
     align-items: center;
     width: 100%;
     padding: 2rem 1rem;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0px;
+    z-index: 25;
 }
+
+/* nav-menu transparency*/
+.nav-menu-wrapper-holder {
+    height: 5.875rem;
+}
+
+div.nav-menu-wrapper.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 4.375rem;
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+div.nav-menu-wrapper div.transparency-scroll {
+    width: 100%;
+    height: 4.375rem;
+    background-color: #ffffff;
+    position: absolute;
+    top: 0;
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius=100, MakeShadow=true);
+  
+    opacity: 0.9;
+    z-index: 20;
+}
+/* end nav-menu transparency*/
 
 div.nav-menu .logo-img {
     width: 8.125rem;
@@ -101,4 +133,18 @@ nav.app-nav .nav-link img {
         height: 1.2rem;
         margin-right: 0.488rem;
     }
+
+    /* nav-menu transparency*/
+    .nav-menu-wrapper-holder {
+        height: 7.559375rem;
+    }
+
+    div.nav-menu-wrapper.fixed {
+        height: 7.1875rem;
+    }
+
+    div.nav-menu-wrapper div.transparency-scroll {
+        height: 7.1875rem;
+    }
+    /* end nav-menu transparency*/
 }
