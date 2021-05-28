@@ -118,7 +118,7 @@ export default class Home extends React.Component {
 
   maximizeClickedImage = (clickedImageProps) => {
     
-    console.log(clickedImageProps)
+    //console.log(clickedImageProps)
     // sets the props states of the image to be maximized
     this.setState({clickedImageProps:clickedImageProps})
 
@@ -155,7 +155,6 @@ export default class Home extends React.Component {
     let carouselElement = document.querySelector('.home-content .carousel-section');
     
     if (ScrollDotIndex === 0) {
-      console.log('aaa')
       carouselElement.scrollTo({
           left: 0,
           behavior: 'smooth'
@@ -209,21 +208,25 @@ export default class Home extends React.Component {
 
 
     let queryBuild = searchedStringSanitized.split(" ");
+    queryBuild = queryBuild.map(() => {
+
+    })
 
 
 
 
 
 
-
-
+    console.log(searchedStringSanitized);
 
 
     console.log(queryBuild);
 
+
+
     this.getTwitterImages(searchedStringSanitized);
     this.getTwitterPosts(searchedStringSanitized);
-    
+    this.saveSearches(searchedStringSanitized);
   };
 
   checkResults() {
@@ -245,9 +248,50 @@ export default class Home extends React.Component {
     return false;
   };
 
+  formattedDate(d = new Date()) {
+    return [d.getDate(), d.getMonth()+1, d.getFullYear()]
+        // add zeros when n < than 10, return a new array
+        .map(n => n < 10 ? `0${n}` : `${n}`)
+        // join the pevious array into a string and return it
+        .join('/');
+  }
+
+  formattedHour(d = new Date()) {
+    return [d.getHours(), d.getMinutes()]
+        // add zeros when n < than 10, return a new array
+        .map(n => n < 10 ? `0${n}` : `${n}`)
+        // join the pevious array into a string and return it
+        .join(':');
+  }
+
+  saveSearches (searchedString) {
+
+    let body = JSON.stringify({
+        "records": [
+            {
+            "fields": {
+                "Squad": "1",
+                "Hashtag": searchedString,
+                "Data": this.formattedDate(),
+                "Hora": this.formattedHour()
+                }
+            }
+        ]
+    });
+
+    fetch('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas', {
+        method: 'POST',
+        headers: {
+            authorization: 'Bearer key2CwkHb0CKumjuM',
+            'content-type': 'application/json'
+        },
+        body: body
+    });
+};
 
 
 
+//backlog listar hashs procuradas no title
 
 
 
