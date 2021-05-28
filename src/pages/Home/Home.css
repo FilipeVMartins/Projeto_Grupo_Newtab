@@ -8,12 +8,14 @@ body {
     letter-spacing: 0px;
 }
 
+.home-content {
+    cursor: default;
+}
 .home-content * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     font-family: 'Rubik', sans-serif;
-    
 }
 
 .home-header {
@@ -133,6 +135,7 @@ body {
     margin-top: 1.563rem;
     margin-bottom: 3.125rem;
     overflow: auto;    
+    overflow-y: hidden;
 }
 
 .carousel-arrows-wrapper {
@@ -147,6 +150,11 @@ body {
     position: absolute;
     z-index: 10;
     display: none;
+    cursor: pointer;
+}
+
+.carousel-arrows-wrapper:hover {
+    background-color: #d3d3d3;
 }
 
 .carousel-arrows {
@@ -163,13 +171,6 @@ body {
     /* background-color: aliceblue; */
     background-color: #FFFFFF;
 }
-
-
-
-
-
-
-
 
 
 
@@ -213,7 +214,6 @@ body {
     }
     
     .home-header-title h3 {
-        
         max-width: 38rem;
         margin-top: 1.875rem;
         font-size: 1.938rem;
@@ -287,6 +287,7 @@ body {
         margin-right: auto; */
         left: 0px;
         overflow: auto;
+        overflow-y: hidden;
     }
 
     .carousel-arrows-wrapper {
@@ -304,10 +305,6 @@ body {
         
     }
 
-
-
-
-
     .three-dots-wrapper {
         display: flex;
         flex-direction: row;
@@ -315,8 +312,8 @@ body {
         align-items: center;
         position: absolute;
         bottom: 0px;
-
     }
+
     .scroll-dot {
         width: 0.938rem;
         height: 0.938rem;
@@ -324,6 +321,7 @@ body {
         border-radius: 50%;
         z-index: 15;
         margin: 0.594rem;
+        cursor: pointer;
     }
 
     .scroll-dot:hover {
@@ -334,8 +332,8 @@ body {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: flex-start;
     }
-
 
     .home-results .posts-section {
         display: flex;

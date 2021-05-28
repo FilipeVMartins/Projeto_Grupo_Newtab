@@ -10,9 +10,40 @@ import svg from '../../images/layout1/about-illustration.svg';
 
 export default class About extends React.Component {
 
+  state = {
+    textAbout:"",
+    list:[]
+  }
+
+  /* ===============puxando sobre da api ===============*/
+  componentDidMount(){
+    this.getTableSobre()
+    this.getTableEquipe()
+  }
+
+   getTableSobre(){
+    fetch("https://api.airtable.com/v0/app6wQWfM6eJngkD4/Projeto?api_key=key2CwkHb0CKumjuM&filterByFormula=({Squad}='1')", {
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+        this.setState({textAbout:responseJson.records[0].fields.Sobre})
+    })
+  }
+
+  /*====================puxando informações da equipe da api =================*/
+
+  getTableEquipe(){
+    fetch("https://api.airtable.com/v0/app6wQWfM6eJngkD4/Equipe?api_key=key2CwkHb0CKumjuM&filterByFormula=({Squad}='1')", {
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+        this.setState({list:responseJson.records})
+        console.log(responseJson)
+    })
+  }
+
   render() {
-
-
+    
     return (
     
       <div className="about-content">
@@ -25,82 +56,34 @@ export default class About extends React.Component {
           <div className="about-projeto">
             <div className="about-aside">
               <h3>O que é</h3>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                  sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                   Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                      At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-                    no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
-                sed diam voluptua. At vero eos et accusam et justo duo dolores
+            <p>{this.state.textAbout}
               </p>
             </div>
             <img src={svg} alt="Logo" className="about-svg" />
           </div>
           <h1 className="about-we">Quem somos nós</h1>
-          <div className="about-team">
-            <div className="about-card">
-              <div className="about-team-content">
-                <div className='about-simulation-foto'></div>
-                <h2>Nome Sobrenome</h2>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-                  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...
-                </p>
-                <div className="about-socials">
-                  <a href="#"><i className="fab fa-github"></i></a>
-                  <a href="#"><i className="fas fa-envelope"></i></a>
-                  <a href="#"><i className="fab fa-linkedin"></i></a>
-                </div>
-              </div>
+            <div className="about-team">
+              {this.state.list.map((person, index) => {
+                if(person.fields.Nome != "Matheus Olegário"){
+                return(
+                  <div className="about-card" key={'person-card' + index}>
+                    <div className="about-team-content">
+                      <div className='about-simulation-foto'>
+                        <img src={person.fields['Imagem de perfil'][0].url}></img>
+                      </div>
+                      <h2>{person.fields.Nome}</h2>
+                      <p>{person.fields.Descrição}</p>
+                      <div className="about-socials">
+                        <a href={person.fields.Github}><i className="fab fa-github"></i></a>
+                        <a href={person.fields.Email}><i className="fas fa-envelope"></i></a>
+                        <a href={person.fields.LinkedIn}><i className="fab fa-linkedin linkedin"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                )
+                }
+              })}
             </div>
-
-            <div className="about-card">
-              <div className="about-team-content">
-                <div className='about-simulation-foto'></div>
-                <h2>Nome Sobrenome</h2>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-                  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...
-                </p>
-                <div className="about-socials">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                  <a href="#"><i class="fas fa-envelope"></i></a>
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div className="about-card">
-              <div className="about-team-content">
-                <div className='about-simulation-foto'></div>
-                <h2>Nome Sobrenome</h2>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-                  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...
-                </p>
-                <div className="about-socials">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                  <a href="#"><i class="fas fa-envelope"></i></a>
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div className="about-card">
-              <div className="about-team-content">
-                <div className='about-simulation-foto'></div>
-                <h2>Nome Sobrenome</h2>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
-                  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...
-                </p>
-                <div className="about-socials">
-                  <a href="#"><i class="fab fa-github"></i></a>
-                  <a href="#"><i class="fas fa-envelope"></i></a>
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
           <footer>
            <Footer/>
           </footer>
