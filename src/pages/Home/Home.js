@@ -30,6 +30,8 @@ export default class Home extends React.Component {
     clickedImageProps: null,
     maximizedImageDisplay: 'none',
 
+    searchDisplay: '',
+
     carouselPointer: 0
   }
 
@@ -210,6 +212,7 @@ export default class Home extends React.Component {
       return ('#'+hashtag)
     })
     searchDisplay = searchDisplay.join(' ')
+    this.setState({searchDisplay:searchDisplay})
 
     this.getTwitterImages(searchedStringSanitized);
     this.getTwitterPosts(searchedStringSanitized);
@@ -316,7 +319,7 @@ export default class Home extends React.Component {
 
           <div className="results-title" style={{display: this.state.twitterImages || this.state.twitterPosts ? 'block' : 'none'}}>
             
-            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
+            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para <span>{this.state.searchDisplay}</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
           </div>
 
 

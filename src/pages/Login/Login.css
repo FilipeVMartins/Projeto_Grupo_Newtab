@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.fundo-page .login-nav {
+  width: 100%;
+}
+
 .fundo-page button {
   cursor: pointer;
   background: #3633F7;

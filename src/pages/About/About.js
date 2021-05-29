@@ -49,7 +49,7 @@ export default class About extends React.Component {
       <div className="about-content">
           <div className="about-header">
             <header className="header">
-                <NavMenu/>
+                <NavMenu headerHeightMobile={12.875} headerHeightDesktop={26.3643}/>
             </header>
              <h1 className="about-sobre">Sobre o projeto</h1>
           </div>

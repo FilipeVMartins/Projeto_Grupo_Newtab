@@ -3,6 +3,7 @@ import MenuSearch from '../../components/Menu/MenuSearch'
 import './SearchListing.css'; // Estava 'SearchiListing', mudei para 'SearchListing'
 import useWindowDimensions from "../../components/WindowsDimension/useWindowDimensions";
 import Axios from 'axios';
+import NavMenu from '../../components/Menu/NavMenu';
 
 
 
@@ -27,7 +28,10 @@ function SearchListing() {
 
     return (
         <div className="searchListingBackground">
-            <MenuSearch />
+            {/* <MenuSearch /> */}
+            <div className="searchListing-nav" >
+                <NavMenu headerHeightMobile={5.875} headerHeightDesktop={7.5593}/>
+            </div>
             <div className={"searchListing searchListing" + platform}>
                 <div className={"searchListingDiv" + platform}>
                     <span className={"searchListingTitle searchListingTitle" + platform}>Buscas realizadas</span>
