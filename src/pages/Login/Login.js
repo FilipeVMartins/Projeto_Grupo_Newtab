@@ -8,31 +8,50 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import NavMenu from '../../components/Menu/NavMenu';
 
 import './Login.css';
+import axios from '../../services/axios';
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login() {  
+  const [email, setEmail] = useState([]);
+  const [password, setPassword] = useState([]);
+  const [redirectSearchListing, setRedirectSearchListing] = useState(false);
+  
+  React.useEffect(() => {
+    async function getData() {
+      const response = await axios.get('Email');
+      const {data} = response;
+      console.log(response.data);
+    }
 
-  function handleSubmit(e) {
+    getData();
+    console.log('oi');
+  }, []);
+
+  // validando o form no front
+  const handleSubmit = e => {
     e.preventDefault();
     let formErrors = false;
 
     if (!isEmail(email)) {
       formErrors = true;
-      toast.error('E-mail inválido!');
-    }
-
-    if (password.length <= 5 || password.length >= 10) {
+      toast.error('E-mail inválido !');
+    } 
+     
+    if (password.length <= 5) {
       formErrors = true;
-      toast.error('Senha deve ter entre 6 e 10 caracteres!');
-      console.log(formErrors);
+      toast.error('A senha deve ter 6 caracteres !');
+      // console.log(formErrors);
     }
   }
-  
+  // contato@newtab.academy
+  // 123456  
   return (
     <div className="fundo-page">
-      <NavMenu />
-      
+      {/* { redirectSearchListing === true ? <Redirect to="/SearchListing" /> : '' } */}
+
+      <div className="nav">
+        <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25} />
+      </div>
+
       <div className="loginpage-container">        
         <form onSubmit={handleSubmit}>
           <h1>Login</h1>
@@ -57,7 +76,8 @@ export default function Login() {
 
           <button type="submit"><span>ACESSAR</span></button>
         </form>
-      </div>    
+      </div>
+
     </div>  
   );
 }
