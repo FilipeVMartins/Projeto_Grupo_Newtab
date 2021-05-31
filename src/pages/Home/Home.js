@@ -14,32 +14,22 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import './Home.css';
 
-
-
 export default class Home extends React.Component {
-
-
-
 
   state = {
     searchedString: '',
     twitterImages: null,
     twitterPosts: null,
 
-    //clickedImageTweetID: '',
     clickedImageProps: null,
     maximizedImageDisplay: 'none',
+
+    searchDisplay: '',
 
     carouselPointer: 0
   }
 
-
-
-  componentDidMount () {
-    //console.log(typeof (this.state.twitterPosts.data) )
-  }
-
-
+  // function to fetch twitter data after search submit
   getTwitterImages = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
@@ -59,6 +49,7 @@ export default class Home extends React.Component {
 
   }
 
+  // function to fetch twitter data after search submit
   getTwitterPosts = (searchedStringSanitized) => {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAFlKHgEAAAAApBW4nRyRkiogluzAbXlS4KuHlMU%3DFcR7r8N19LRnMHLVmYlFsod6Be6zUvZD2rxATotl6mLPAh2UEX");
@@ -77,7 +68,7 @@ export default class Home extends React.Component {
       .catch(error => console.log('error on getting twitter posts ', error));
   }
 
-  // get user data from posts requests by id
+  // get user data from posts requests by id, user = author of a specific post.
   getUserPostData(userId) {
     let foundUser = null;
 
@@ -90,7 +81,7 @@ export default class Home extends React.Component {
     return foundUser
   };
 
-  // get user data from images requests by id
+  // get user data from images requests by id, user = author of a specific post.
   getUserImageData(userId) {
     let foundUser = null;
 
@@ -103,7 +94,7 @@ export default class Home extends React.Component {
     return foundUser
   };
 
-  // get media data from images requests by media keys
+  // get media data from images requests by media keys, media = registry in the include json with the image data (size, url, type etc)
   getMediaData(mediaKey) {
     let foundMedia = null;
 
@@ -116,9 +107,9 @@ export default class Home extends React.Component {
     return foundMedia
   };
 
+  // function to display the maximized image component and store the data of the clicked image to be used by the maximized component.
   maximizeClickedImage = (clickedImageProps) => {
     
-    //console.log(clickedImageProps)
     // sets the props states of the image to be maximized
     this.setState({clickedImageProps:clickedImageProps})
 
@@ -126,6 +117,7 @@ export default class Home extends React.Component {
     this.setState({maximizedImageDisplay: 'flex'})
   }
 
+  // function to hide the maximized image component
   hideClickedImage = () => {
     this.setState({maximizedImageDisplay: 'none'})
   }
@@ -210,6 +202,7 @@ export default class Home extends React.Component {
       return ('#'+hashtag)
     })
     searchDisplay = searchDisplay.join(' ')
+    this.setState({searchDisplay:searchDisplay})
 
     this.getTwitterImages(searchedStringSanitized);
     this.getTwitterPosts(searchedStringSanitized);
@@ -276,20 +269,14 @@ export default class Home extends React.Component {
     });
 };
 
-
-
-//backlog listar hashs procuradas no title
-
-
-
   render() {
     let user;
     let media;
-    
 
     return (
       <div className="home-content">
         <div className="home-header">
+
           <div className="home-nav" >
             <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25}/>
           </div>
@@ -310,15 +297,11 @@ export default class Home extends React.Component {
 
         </div>
 
-
         <div className="home-results" >
 
-
           <div className="results-title" style={{display: this.state.twitterImages || this.state.twitterPosts ? 'block' : 'none'}}>
-            
-            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para #<span>natureza</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
+            {this.checkResults() ? <h2>Exibindo os 10 resultados mais recentes para <span>{this.state.searchDisplay}</span></h2> : <h2>Não foram encontrados resultados para #<span>natureza</span></h2> }
           </div>
-
 
           <div className="carousel-section-wrapper" style={{display: this.state.twitterImages && (typeof this.state.twitterImages.data !== 'undefined') ? 'flex' : 'none'}}>
             <div className="carousel-section" onScroll={this.handleCarouselSideScroll} >
@@ -333,18 +316,7 @@ export default class Home extends React.Component {
               })
               : ''
               }
-              {/* <ImageResult imageSrc={'https://picsum.photos/id/234/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/233/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/232/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/231/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/230/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/229/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/228/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/227/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/223/160/228'} atUsername="@twitterusername" ></ImageResult>
-              <ImageResult imageSrc={'https://picsum.photos/id/225/160/228'} atUsername="@twitterusername" ></ImageResult>           */}
             </div>
-
 
             <div className="carousel-arrows-wrapper arrow-wrapper-left" onClick={() => this.carouselArrowClick(-1)}>
               <ArrowLeftIcon className="carousel-arrows carousel-left-arrow" />
@@ -378,11 +350,6 @@ export default class Home extends React.Component {
               })
               : ''
               }
-              {/* <PostResult avatarSrc={'https://picsum.photos/id/237/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/238/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/239/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/240/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/241/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt...'} seeMorelink={''} ></PostResult> */}
             </div>
 
             <div className="posts-section">
@@ -400,14 +367,8 @@ export default class Home extends React.Component {
               })
               : ''
               }
-              {/* <PostResult avatarSrc={'https://picsum.photos/id/242/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/243/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/244/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/247/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...'} seeMorelink={''} ></PostResult>
-              <PostResult avatarSrc={'https://picsum.photos/id/248/82/82'} userName={'UserName'} attwitterusername={'@twitterusername'} postParagraph={'RT @username Lorem ipsum dolor sit amet, consetetur...'} seeMorelink={''} ></PostResult> */}
             </div>
           </div>
-
 
         </div>
 

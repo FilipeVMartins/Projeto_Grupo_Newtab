@@ -20,6 +20,9 @@ body{
     display: flex;
     flex-direction: column;
 }
+.searchListing-nav{
+    margin-right: 2rem;
+}
 .listingTop{
     color:#3633F7;
 }
@@ -98,4 +101,10 @@ tr:last-child{
 .searchListingDivMobile {
     width: 90%;
     text-align: center;
+}
+
+@media screen and (min-width: 660px) {
+    .searchListing-nav{
+        margin-right: 8rem;
+    }
 }

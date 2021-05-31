@@ -48,7 +48,7 @@ export default class NavMenu extends React.Component {
     let fontSize = (platform === 'Mobile' ) ? 3.865 : 0.833 ;
     fontSize = windowWidth * (fontSize/100)
     // header height in rem unit
-    let headerHeight = (platform === 'Mobile' ) ? 32.5 : 49.25 ;
+    let headerHeight = (platform === 'Mobile' ) ? this.props.headerHeightMobile : this.props.headerHeightDesktop ;
     // responsive header height in px
     headerHeight = headerHeight * fontSize;
 

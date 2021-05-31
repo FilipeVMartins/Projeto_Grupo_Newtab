@@ -52,6 +52,10 @@ export default function Login() {
         <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25} />
       </div>
 
+      <div className="login-nav">
+        <NavMenu headerHeightMobile={32.5} headerHeightDesktop={49.25}/>
+      </div>
+      
       <div className="loginpage-container">        
         <form onSubmit={handleSubmit}>
           <h1>Login</h1>
