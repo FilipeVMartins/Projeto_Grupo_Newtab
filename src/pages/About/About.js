@@ -64,12 +64,12 @@ export default class About extends React.Component {
           <h1 className="about-we">Quem somos nós</h1>
             <div className="about-team">
               {this.state.list.map((person, index) => {
-                if(person.fields.Nome != "Matheus Olegário"){
+                if(person.fields.Nome !== "Matheus Olegário"){
                 return(
                   <div className="about-card" key={'person-card' + index}>
                     <div className="about-team-content">
                       <div className='about-simulation-foto'>
-                        <img src={person.fields['Imagem de perfil'][0].url}></img>
+                        <img src={person.fields['Imagem de perfil'][0].url} alt="profile"></img>
                       </div>
                       <h2>{person.fields.Nome}</h2>
                       <p>{person.fields.Descrição}</p>
@@ -81,6 +81,9 @@ export default class About extends React.Component {
                     </div>
                   </div>
                 )
+                }
+                else {
+                  return null;
                 }
               })}
             </div>

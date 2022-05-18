@@ -40,7 +40,7 @@ export default class Home extends React.Component {
       redirect: 'follow'
     };
 
-    fetch(`https://cors.bridged.cc/https://api.twitter.com/2/tweets/search/recent?query=${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
+    fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/2/tweets/search/recent?query=${searchedStringSanitized} has:hashtags -is:retweet -is:quote has:images&max_results=10&expansions=author_id,attachments.media_keys&user.fields=id,name,username,profile_image_url,url&media.fields=type,url,width,height`, requestOptions)
       .then(response => response.json())
       .then(result => {
         this.setState({twitterImages:result});

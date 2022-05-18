@@ -8,22 +8,24 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import NavMenu from '../../components/Menu/NavMenu';
 
 import './Login.css';
-import axios from '../../services/axios';
+//import axios from '../../services/axios';
+// import axios from 'axios';
 
 export default function Login() {  
+  //const [data, setData] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirectSearchListing, setRedirectSearchListing] = useState(false);
   
-  React.useEffect(() => {
-    async function getData() {
-      const response = await axios.get('Email');
-      const {data} = response;
-      console.log(response.data);
-    }
+  // async function getData() {
+  //   const response = await axios.get('https://api.airtable.com/v0/app6wQWfM6eJngkD4/Login?api_key=key2CwkHb0CKumjuM&filterByFormula=(AND({Email}="contato@newtab.academy",{Senha}="123456",{Squad}="1"))');
+  //   const {data} = response;
+  //   setData(response);
+  // }
 
-    getData();
-    console.log('oi');
+  React.useEffect(() => {
+
+    //getData();
 
     if(localStorage.getItem('logged') === 'true'){
       setRedirectSearchListing(true)
@@ -33,7 +35,6 @@ export default function Login() {
   // validando o form no front
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('oi');
     let formErrors = false;
 
     if (!isEmail(email)) {
@@ -58,11 +59,13 @@ export default function Login() {
     .then(response => response.json())
     .then(responseJson => {
 
-        if(responseJson.records[0].fields.Email === email && responseJson.records[0].fields.Senha == password){
+        if(responseJson.records[0].fields.Email === email && responseJson.records[0].fields.Senha === password){
           setRedirectSearchListing(true)
           localStorage.setItem('logged', 'true');
+          toast.success('Login bem sucedido!');
         } else {
-          setRedirectSearchListing(false)
+          setRedirectSearchListing(false);
+          toast.error('Usuário e senha não encontrados!');
         }
     })
   }

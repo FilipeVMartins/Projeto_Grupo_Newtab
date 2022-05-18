@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import MenuSearch from '../../components/Menu/MenuSearch'
+//import MenuSearch from '../../components/Menu/MenuSearch'
 import './SearchListing.css'; // Estava 'SearchiListing', mudei para 'SearchListing'
 import useWindowDimensions from "../../components/WindowsDimension/useWindowDimensions";
-import Axios from 'axios';
+//import Axios from 'axios';
 import NavMenu from '../../components/Menu/NavMenu';
 
 
@@ -46,7 +46,7 @@ function SearchListing() {
                         </tr>
                     </thead>
                     <tbody>                        
-                            {data.map(
+                            {data?.map(
                                 item =>
                                 (
 
@@ -56,7 +56,8 @@ function SearchListing() {
                                         <td className={"listingObjectHour listingObject" + platform}>{item.fields.Hora}</td>
                                     </tr>
 
-                                ))}
+                                ))
+                            }
                     </tbody>
                 </table>
 

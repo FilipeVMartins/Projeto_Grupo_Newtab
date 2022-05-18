@@ -92,7 +92,7 @@ export default class NavMenu extends React.Component {
                         <img src={LoginIcon} alt="Login Icon" />
                         <h2>Login</h2>
                 </NavLink>
-                <NavLink onClick={() => this.logout()} exact to="/" className={`nav-link blue-link ${this.state.displayLogoutButton ? '': 'hide-link'}`} onClick={() => this.logout()} activeClassName="App-link-CurrentPage" >
+                <NavLink exact to="/" className={`nav-link blue-link ${this.state.displayLogoutButton ? '': 'hide-link'}`} onClick={() => this.logout()} activeClassName="App-link-CurrentPage" >
                         <img src={LogoutIcon} alt="Sair Icon" />
                         <h2>Sair</h2>
                 </NavLink>
